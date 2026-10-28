@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `4f689fa0d268ed623f4cf1de94caa04ab14140e5`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
+当前源码 pin 为 `2ae5b9a1cfaff04325642e9f288f5debfd8c9577`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -134,3 +134,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 源码提交 `4f689fa0d268ed623f4cf1de94caa04ab14140e5` 已推送：Codex 事务使用系统锁，进程退出后内核释放持锁，保留同一 inode 的旧锁入口防止旧客户端并发写；未知旧锁仍不自动删除。隔离 SIGKILL 组件测试12项、事务集成测试48项通过，辅助进程入口按测试设计忽略；整工作区并行测试通过，Core Clippy通过。macOS/Android原生、Windows写入及非协作方最后一次检查与rename之间的竞争仍未通过。
 
 新增可选测试 feature 导出实际 GPUI Scene，默认构建不启用；900×560 合成数据的旧r2界面已实际渲染，PNG SHA-256 `777d6aff0ec457e63c8e8e89a17ccd15b48a2d38ce7995eb8a0b43342cd23c56`。GUI组件59项及visual-test全target Clippy通过；Scene不是实际窗口输入/IME/读屏或用户认可，r2仍被否决。逐项证据见源码 `tests/results/crash-lock-and-native-scene-2026-10-29.json`。
+
+## 依赖修复（2026-10-29）
+
+源码提交 `2ae5b9a1cfaff04325642e9f288f5debfd8c9577` 将 Gateway 的 bytes 从 1.10.1 固定到 1.11.1，以包含 GHSA-434x-w66g-qw3r 修复。独立工作树、无账号合成 fixture 的全工作区测试101项通过，4个辅助进程入口按设计忽略；service 全target Clippy通过。该结果不宣称本产品的漏洞可利用性已证实、跨平台均已验收，GitHub远端告警重新扫描状态待观察。测试工作树已移除。证据见源码 `tests/results/bytes-upgrade-2026-10-29.json`。
