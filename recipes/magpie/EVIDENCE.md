@@ -158,3 +158,5 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 ## 四协议转换与回环网关（2026-10-29）
 
 源码提交 `cc22e7dacc5794d1b20765d5c1c383a8a734a5b1` 已推送；四协议转换接入 Gateway。Linux 合成回环 HTTP/SSE、工具调用、取消、错误脱敏及纯转换合计54项 service 测试，另有 Clippy 和格式检查通过。不支持无损转换的输入明确拒绝；完整官方字段、真实外部上游/账户、Provider 存储接线和其他系统未验收。活跃请求仍上限4、总超时120秒、空闲超时10秒，未宣称性能提升。证据见源码 `tests/results/protocol-gateway-2026-10-29.json`。
+
+源码 `cc22e7dacc5794d1b20765d5c1c383a8a734a5b1` 的无显示 Linux 工作区随后统一运行 `cargo test --offline --locked --workspace --all-targets`：215 项通过，4 个辅助进程入口按设计忽略。该命令不覆盖独立桌面工作区，也不代表未合并的 Pro 版本或完整产品通过。
