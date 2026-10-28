@@ -5,20 +5,20 @@
 | REQ | 需求 | 所属配方 | 归档内规格 | 状态 |
 | --- | --- | --- | --- | --- |
 | REQ-001 | 只显示可用 Agent | magpie | `./GLOBAL.md` | 部分：CLI 使用隔离 PATH 验证只列出已安装支持项；桌面用户验收未通过 |
-| REQ-002 | 保持用户已有数据 | magpie | `./GLOBAL.md` | 未执行 |
-| REQ-003 | 显式连接与断开 | magpie | `./GLOBAL.md` | 未执行 |
+| REQ-002 | 保持用户已有数据 | magpie | `./GLOBAL.md` | 部分：Codex隔离配置保留注释/未知字段与原字节恢复已测；其他Agent、真实用户数据及全部异常未验收 |
+| REQ-003 | 显式连接与断开 | magpie | `./GLOBAL.md` | 部分：CLI及桌面ActionsState→真实CLI的预览/保存/离线恢复已测；两种原配置状态通过真实Codex，原生窗口操作未验收 |
 | REQ-004 | 统一模型选择和每 Agent 可见列表 | magpie | `./GLOBAL.md` | 未执行 |
 | REQ-005 | 用户可保存和切换 Profile | magpie | `./GLOBAL.md` | 未执行 |
-| REQ-010 | 多个入口反映同一状态 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
+| REQ-010 | 多个入口反映同一状态 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：CLI、Gateway与桌面Snapshot/ActionsState共享Codex配置并实测闭环；原生窗口、Web/TUI和其他产品状态未验收 |
 | REQ-011 | 发现和列出 Agent | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：五类 Agent 的 PATH 发现与 Codex 模型/Provider/effort 只读提取已测；其它 Agent 配置和完整操作流程未实现 |
-| REQ-012 | 兼容 Agent 的公开配置格式 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
-| REQ-013 | 只做精确、可恢复的字段编辑 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
-| REQ-014 | 接入、漂移和断开 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
+| REQ-012 | 兼容 Agent 的公开配置格式 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：Codex公开TOML配置的有界读取和事务已测；其他Agent格式及版本兼容未实现 |
+| REQ-013 | 只做精确、可恢复的字段编辑 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：Codex七个字段、同文件系统私有事务、原字节/漂移选择性恢复及并发/中断fixture已测；真实断电、Windows写入和其他Agent未验收 |
+| REQ-014 | 接入、漂移和断开 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：Codex接入/归属/漂移/恢复的组件及CLI fixture已测；真实Codex两场景离线恢复通过，窗口与其他Agent未验收 |
 | REQ-015 | Agent 专属字段和 Profile 保留 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
 | REQ-016 | 跨 Agent 模型目录 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
 | REQ-017 | 每 Agent 模型可见性 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
 | REQ-018 | 保存、应用和删除 Profile | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
-| REQ-019 | 变化重扫和状态反馈 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 未执行 |
+| REQ-019 | 变化重扫和状态反馈 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：Snapshot刷新、缺失文件不保留旧托管值、ActionsState重读归属已测；完整变化监控与窗口焦点未验收 |
 | REQ-020 | Provider 目录和新增 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
 | REQ-021 | 多个上游密钥和 Provider 编辑 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
 | REQ-022 | 模型列表和目录元数据 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
@@ -29,13 +29,13 @@
 | REQ-027 | 账户顺序和约束 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
 | REQ-028 | 计划与本机订阅使用限制 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
 | REQ-029 | 账号和模型状态对外说明 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
-| REQ-030 | 本地 Gateway 生命周期 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：Linux loopback 启动/健康检查通过；端口占用、退出恢复、桌面集成和其他平台未验证 |
-| REQ-031 | 请求入口与模型标识 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
-| REQ-032 | 协议转换和流式行为 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
-| REQ-033 | 错误、状态码和请求归属 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
-| REQ-034 | 模型目录契约 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：空/已配置目录的 CLI 与 HTTP 已测，60 模型目录 100 次请求零错误；上游模型发现、缓存更新尚未实现 |
-| REQ-035 | 本机访问和远程鉴权 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
-| REQ-036 | Agent 连接到网关 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
+| REQ-030 | 本地 Gateway 生命周期 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：Linux真实TCP启动、健康/端口冲突/限额/启动超时fixture已测；Android双ARM真机HTTP/SSE通过，桌面生命周期及各系统安装恢复未验收 |
+| REQ-031 | 请求入口与模型标识 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：仅loopback HTTP Provider的Chat/Responses模型重写、JSON/SSE及真实Codex已测；其余协议和外部TLS未实现 |
+| REQ-032 | 协议转换和流式行为 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：Chat/Responses透传、UTF-8/CR-LF/BOM、工具增量、流终止/失败/取消已测；跨协议转换及Messages/Gemini未实现 |
+| REQ-033 | 错误、状态码和请求归属 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：固定脱敏错误、上游错误/不完整流与并发拒绝已测；完整请求归属/Usage和外部上游兼容未实现 |
+| REQ-034 | 模型目录契约 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：公开模型目录CLI/HTTP及桌面真实gateway inspect已测；configured不表示健康，上游发现/缓存更新未实现 |
+| REQ-035 | 本机访问和远程鉴权 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：仅字面loopback与Host/Origin等访问限制已测；LAN分享、受限key和远程鉴权未实现 |
+| REQ-036 | Agent 连接到网关 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：安装版Codex0.165在隔离HOME经真实Gateway收到中文Responses流并恢复；其他Agent/真实账户未验收 |
 | REQ-037 | 会话、账户固定和观测 API | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
 | REQ-038 | 远程 magpie | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
 | REQ-039 | Gateway 的附加查询接口 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
@@ -79,7 +79,7 @@
 | REQ-077 | 每台电脑保留的设置 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/07-library-sync-and-backup.md` | 未执行 |
 | REQ-078 | 远端内容和恢复保护 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/07-library-sync-and-backup.md` | 未执行 |
 | REQ-079 | Usage 数据与请求档案 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/07-library-sync-and-backup.md` | 未执行 |
-| REQ-080 | 运行形态 | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 未执行 |
+| REQ-080 | 运行形态 | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 部分：无显示/GPU的CLI和桌面ActionsState测试通过、GPUI release已构建；窗口/托盘/后台完整生命周期、Web/TUI未验收 |
 | REQ-081 | 桌面导航和设置 | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 未执行 |
 | REQ-082 | 浏览器 Web UI | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 未执行 |
 | REQ-083 | TUI | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 未执行 |
@@ -90,10 +90,10 @@
 | REQ-091 | 网络入口、鉴权和限流 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
 | REQ-092 | Privacy 默认和本机数据 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
 | REQ-093 | Private URL、代理和 SSRF | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
-| REQ-094 | 多平台和 WSL 边界 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 部分：Android 四架构构建，ARM64/ARMv7 真机验证；Linux musl 三种非本机架构曾经 QEMU 验证。macOS、Windows、NixOS/WSL 原生验收未执行 |
+| REQ-094 | 多平台和 WSL 边界 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 部分：当前HTTP/SSE业务的Android四ABI API23构建、ARM64/ARMv7真机转发通过；设备事务因0771祖先目录拒绝，旧musl/QEMU证据不替代当前构建，macOS/Windows/NixOS/WSL未验收 |
 | REQ-095 | 隐私工具与外部上游 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
 | REQ-100 | 视觉方向 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未通过：旧设计与Pro重设计方向均被用户否决；以原版为最低视觉基线重新设计，待原生视觉及用户验收 |
 | REQ-101 | App 和紧凑 Panel 布局 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
-| REQ-102 | 语言 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
-| REQ-103 | 可访问性与操作反馈 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
+| REQ-102 | 语言 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：五语文本与CJK/grapheme输入组件已测；原生IME、语言切换焦点/持久化及locale日期数字未完整验收 |
+| REQ-103 | 可访问性与操作反馈 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：焦点/取消/预览失效和真实输入组件测试通过；原生键盘、IME/读屏及新视觉仍待验收 |
 | REQ-104 | 参考截图与产品数据 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |

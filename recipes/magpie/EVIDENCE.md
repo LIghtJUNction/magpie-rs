@@ -1,10 +1,25 @@
 # 验证证据
 
-## Pro UI与基准修正快照
+## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码pin为 `ffe2b6f20bfa06be9cdcd8b1f15a9d8308026725`，已推送并回读main。Pro原文278582字节、SHA256 `6916df85160107a461bd6cb4789e502c53732814855e231322d97b26b87da2be`；交付ZIP SHA256 `c261d8dc5f614abd09a80f4969eff930ea9bee7e563c415a8862e1fd4de6b263`。四份替换文件与归档逐字节一致。
+当前源码 pin 为 `4ff1e55a399bf0946a8afa9abffc33ea0ae83f8e`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
 
-- 原生Linux release构建、fmt与Clippy -D warnings通过，窗口已启动供用户查看；用户视觉认可待确认。
+- bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
+- Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
+- 根 workspace 在应用桌面快照适配后77项通过、2个worker入口由父测试实际调用；Clippy、fmt、rustdoc和release通过。26项真实TCP/启动/CLI用例通过，安装版Codex0.165.0经合成本地Provider收到中文Responses流并恢复原配置；原始证据在源码 `tests/results/`。
+- GPUI actions r1 已原生release构建并通过全目标Clippy、59项组件测试。新增ignored worker由Python显式运行两次：已有配置和原来不存在的配置，两场景均通过真实ActionsState→CLI bridge→CLI→Gateway→Codex请求，停止Gateway后恢复原字节/不存在；8项协调器自检通过。原始结果为源码 `tests/results/desktop-actions-2026-10-29.json`。这是无窗口业务联调，不是原生窗口/IME/读屏验收。
+- CLI release为3,271,792字节，SHA256 `e3463d7717d0f8a73b5ea6d63d363e9835ce1c81dc0afbdb5c83bbf3696b86f1`；不将其与旧空目录版本或完整原版直接比较性能。
+- 当前业务的Android四ABI API23 release构建通过；LG G820上ARM64/ARMv7真实JSON/SSE转发通过。设备配置事务因`/data`祖先0771权限保护而在prepare阶段拒绝，未执行apply/restore。外部完整证据在 `/home/lightjunction/.cache/magpie-rs-build/android/validation-20261029-a7f29c61/results.json`；构建业务闭包的根Cargo与crates共21文件与当前逐字节一致。x86/i686无设备执行；旧musl/QEMU结果不冒充当前版本验收。
+- 用户已明确否决此前Pro暖白/深墨绿与名录/详情方向，并要求不得逊于原版。新任务22-visual-parity-request revision1已发Pro，对照原版浅/深截图并行做视觉、字体和独立审查。视觉未通过，旧窗口和HTML预览不构成新方案验收。
+- AUR/Release尚未发布，未替换安装；全部93REQ及68Agent目标保留，Web/TUI、其他Agent写入、Usage/路由/插件等仍有大量未完成要求。
+
+以下均为历史快照，其旧pin、实现边界和验收状态不描述当前版本。
+
+## 已否决的 Pro UI与基准修正快照（历史）
+
+该次快照源码pin为 `ffe2b6f20bfa06be9cdcd8b1f15a9d8308026725`，已推送并回读main。Pro原文278582字节、SHA256 `6916df85160107a461bd6cb4789e502c53732814855e231322d97b26b87da2be`；交付ZIP SHA256 `c261d8dc5f614abd09a80f4969eff930ea9bee7e563c415a8862e1fd4de6b263`。四份替换文件与归档逐字节一致。
+
+- 原生Linux release构建、fmt与Clippy -D warnings通过，窗口曾启动供用户查看，随后被用户否决，视觉验收未通过。
 - Pro提供17张虚构数据HTML设计稿及五语窄窗/键盘验证记录，不能冒充原生截图或系统读屏验收。当前视觉合同见UI_DIRECTION.md。
 - CLI测量器已修正，280次隔离启动零错误；新结果、正负对照与主机压力见PERFORMANCE.md及源码原始JSON，不将方法修正称为优化收益。
 - 用户新目标为全面超越原版，全部93条需求保留；已继续与Pro协作真实Provider/流式网关/Codex可恢复接入闭环。当前未发布AUR/Release、未替换安装。
