@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `dd35372e5e603b32aa670f5ce7f29b6a6346d8bb`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
+当前源码 pin 为 `72358f5d97cd109809d37eab82fa521681aeb0e7`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -182,3 +182,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 ## 外部构建路径判定修复（2026-10-29）
 
 Linux 上空的祖先 `.git` 目录曾使合法外部缓存路径被误拒绝。源码 `dd35372e5e603b32aa670f5ce7f29b6a6346d8bb` 将打包和基准共用的判断改为验证实际 Git 元数据，保留符号链接及无法判断时的拒绝。合成真实仓库/子模块、工作树、裸仓库与异常情况 14 项、打包 13 项和基准工具 8 项通过；证据见源码 `tests/results/external-paths-2026-10-29.json`。未验证 Windows/macOS 或旧 Git；路径检查与后续 I/O 之间的祖先路径替换竞争仍存在。
+
+## 原版 Agent 合成候选列表（2026-10-29）
+
+源码 `72358f5d97cd109809d37eab82fa521681aeb0e7` 在已观察 Linux 空配置条件下，按原版 CLI 的字节展示 Claude、Codex、Gemini 的单独和三者同时存在场景；`agents` 68 行顺序、尾空格和 `ls` 状态/路径/退出码均以隔离原版样本为准。CLI 36 项通过、1 个由父测试调用的 helper 忽略，fmt 和严格 Clippy 通过；合成未观察场景及其他命令与上一 Rust 基线 245 次输出/退出码对照一致。原版观察见 ORIGINAL_CLI_BEHAVIOR.md，运行证据见源码 `tests/results/original-agent-candidates-2026-10-29.json`。两两组合、真实配置/账户、其他平台以及完整 Agent 功能未验收。
