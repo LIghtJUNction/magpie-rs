@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `812756d81253c3a798d328bd99fb6209fa37270c`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
+当前源码 pin 为 `dd35372e5e603b32aa670f5ce7f29b6a6346d8bb`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -178,3 +178,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 ## 旧网关配置协议回归修复（2026-10-29）
 
 此前扩展四协议后，未指定上游协议的旧配置错误地将 Messages 发往上游：新增回归先收到502、预期501，原 first-loop 仅25/26通过。源码 `812756d81253c3a798d328bd99fb6209fa37270c` 恢复旧入口限制，合成 fixture 验证 Messages/Gemini 拒绝且零上游请求；service 55项、严格 Clippy 与单次26项 first-loop TCP回归通过。另有早先报告的首个 SSE 失败事件响应头时序不确定，单次通过不代表其已修复。证据见源码 `tests/results/protocol-legacy-guard-2026-10-29.json`。
+
+## 外部构建路径判定修复（2026-10-29）
+
+Linux 上空的祖先 `.git` 目录曾使合法外部缓存路径被误拒绝。源码 `dd35372e5e603b32aa670f5ce7f29b6a6346d8bb` 将打包和基准共用的判断改为验证实际 Git 元数据，保留符号链接及无法判断时的拒绝。合成真实仓库/子模块、工作树、裸仓库与异常情况 14 项、打包 13 项和基准工具 8 项通过；证据见源码 `tests/results/external-paths-2026-10-29.json`。未验证 Windows/macOS 或旧 Git；路径检查与后续 I/O 之间的祖先路径替换竞争仍存在。
