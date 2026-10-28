@@ -105,3 +105,7 @@ Linux x86_64，以独立合成 loopback Provider 和已构建 CLI `magpie 0.2.0`
 从源码 `2bbdff72818a94c4ba4ae9e8e72b22cf8ce9ead2` 单线程离线构建 release CLI，二进制 3,654,848 字节，SHA-256 `5fdc33b709f0bca7cc2a5bcc5eb327c9d13eed0befaa55cffee12ea831e62a6a`；使用已提交 runner `0f1a8f7`，输出及指标在 `benchmark/results/forwarding-2026-10-29-current-short.json`。同一合成 loopback 矩阵每格5秒，共3427个直连及网关成功、1217个拒绝、0个错误、5个取消。网关16并发 SSE 40次成功、120次因4活跃上限拒绝。网关4并发 JSON p95 9.72ms、有效吞吐约79.99次/秒，客户端限速20轮/秒，因此不是容量。
 
 目标进程732次采样中最大 RSS 6084KiB、最大 swap 2732KiB；采样间隔 p95约107ms，不含GPU或 Python 进程，短命峰值可能漏掉。本轮主机有其他负载和 swap，5秒格与2秒长流不足以证明持续内存稳定或完整预算通过，也未做原版交替 A/B。旧记录 runner 原始版本缺失、构建来源不明，不能用新旧数字宣称提速或回归。
+
+## SSE 头部修复后的合成短测（2026-10-29）
+
+基于源码 `c1caccb47b683b427cb53d56a0827e352c2137b4` 的 release CLI；SHA-256 `69aa485d9cb58a1ccb1c93fb84174541daad755325eef59d4ff879831b12ea94`，3,682,928 字节。12 个 loopback 格各5秒、长流4秒，3150成功、1156按4活跃上限拒绝、0错误，另有5次取消；16并发SSE为12成功、36拒绝。1256次采样 RSS 最大6020KiB、swap 最大3612KiB，采样间隔 p95约110ms。主机有其他负载，客户端节流至每秒20轮，既不是最大吞吐也不是5分钟或300秒门槛。本轮和旧基线非交替且长流参数不同，**不能认定提速或退化**。脚本、散列、逐格结果和限制见源码 `benchmark/results/forwarding-2026-10-29-sse-flush-short.json`。

@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `c1caccb47b683b427cb53d56a0827e352c2137b4`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
+当前源码 pin 为 `e57bb89eadc6fb6530edd2e145b521f935cb11ee`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -190,3 +190,7 @@ Linux 上空的祖先 `.git` 目录曾使合法外部缓存路径被误拒绝。
 ## SSE 首事件错误导致响应头丢失（2026-10-29）
 
 原始代码可在 body 首次 poll 就报错，Hyper 在发送头之前结束连接：合成原 test06 30次中1次 RemoteDisconnected，确定性模拟在错误时写出0字节。源码 `c1caccb47b683b427cb53d56a0827e352c2137b4` 等待实际 I/O flush 后传播 SSE body 错误，不注入事件、不伪造成功，也不泄露上游错误正文。主源码的 service 56项、严格 Clippy、first-loop 26项、同二进制重复原错误测试1000次和640请求错误矩阵均通过；旧失败记录仍保留。可重放脚本和输入散列见源码 `tests/results/sse-header-flush-2026-10-29.json`。本轮仅 Linux 合成 loopback；Pro Provider 合并版本、真实 TLS 和其他平台尚未复验。
+
+## SSE 修复后转发短测（2026-10-29）
+
+源码 `c1caccb47b683b427cb53d56a0827e352c2137b4` 构建的 release CLI SHA-256 为 `69aa485d9cb58a1ccb1c93fb84174541daad755325eef59d4ff879831b12ea94`，3,682,928 字节。Linux 合成 loopback，12格各5秒、长流4秒：3150次成功、1156次按并发限制拒绝、0错误，另外取消5次；16并发 SSE 成功12/拒绝36。1256次采样目标 RSS 最大6020KiB、swap 最大3612KiB，采样间隔 p95约110ms。启动负载约10.2/24逻辑CPU，客户端每秒最多20轮，非容量或完整产品验收；无交替A/B，不得声称提速或退化。可复核汇总见源码 `benchmark/results/forwarding-2026-10-29-sse-flush-short.json`，含主机遥测的原始结果留在仓外。
