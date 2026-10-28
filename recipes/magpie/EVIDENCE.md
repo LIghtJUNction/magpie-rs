@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `cc22e7dacc5794d1b20765d5c1c383a8a734a5b1`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
+当前源码 pin 为 `2bbdff72818a94c4ba4ae9e8e72b22cf8ce9ead2`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -160,3 +160,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 源码提交 `cc22e7dacc5794d1b20765d5c1c383a8a734a5b1` 已推送；四协议转换接入 Gateway。Linux 合成回环 HTTP/SSE、工具调用、取消、错误脱敏及纯转换合计54项 service 测试，另有 Clippy 和格式检查通过。不支持无损转换的输入明确拒绝；完整官方字段、真实外部上游/账户、Provider 存储接线和其他系统未验收。活跃请求仍上限4、总超时120秒、空闲超时10秒，未宣称性能提升。证据见源码 `tests/results/protocol-gateway-2026-10-29.json`。
 
 源码 `cc22e7dacc5794d1b20765d5c1c383a8a734a5b1` 的无显示 Linux 工作区随后统一运行 `cargo test --offline --locked --workspace --all-targets`：215 项通过，4 个辅助进程入口按设计忽略。该命令不覆盖独立桌面工作区，也不代表未合并的 Pro 版本或完整产品通过。
+
+## 打包安全与短时转发基线（2026-10-29）
+
+源码提交 `2bbdff72818a94c4ba4ae9e8e72b22cf8ce9ead2` 增加有界基准运行器、离线许可证库存及构建/输出隔离检查。13项打包和8项基准合成检查、本机 shell 语法检查通过；缓存中的Linux、Windows、macOS依赖文本与来源清单分别核验，系统库/SDK及许可解释仍有边界，不能推断真实安装包合规或可用。AUR 未发布、安装事务和多平台包未验证。短时基线及旧版运行器字节未保留的限制见 `PERFORMANCE.md` 与源码 `benchmark/results/forwarding-2026-10-29-short.json`；其他证据见 `tests/results/packaging-and-benchmark-2026-10-29.json`。
