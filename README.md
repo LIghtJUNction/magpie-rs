@@ -1,5 +1,7 @@
 # Magpie Rust
 
+![软件与依赖汇聚为可重建的配方](https://raw.githubusercontent.com/recipkg/recipkg/main/assets/recipkg-cover.png)
+
 Rust 重建版 Magpie：独立 CLI、本地网关与 GPUI 桌面界面。当前为早期版本，完整功能合同仍包含 93 条需求，实际状态见 [覆盖索引](recipes/magpie/COVERAGE.md)。
 
 ## 安装
