@@ -172,3 +172,5 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 ## 原版 CLI Agent 空状态（2026-10-29）
 
 源码 `241388874b0b7051c5e441daa0b2f725192c2c86` 已将隔离原版观察用于实际 CLI：无候选时 `agents` 的68行输出、空 `ls` 退出1及 Codex 仅有状态目录的提示通过进程 fixture；`agents --json` 的既有空结构不变。Linux CLI 全target测试27项通过、1辅助入口忽略，Clippy通过。真实已安装 Agent 的原版非空显示和其他命令仍需重建，未测试其他系统。证据见源码 `tests/results/original-cli-empty-2026-10-29.json`。
+
+源码 `241388874b0b7051c5e441daa0b2f725192c2c86` 的 Linux 无显示工作区随后统一运行 `cargo test --offline --locked --workspace --all-targets`：235 项通过、4个辅助入口忽略；不包括独立桌面工作区或尚未合并的 Pro 版本。
