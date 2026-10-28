@@ -14,3 +14,5 @@ gh repo view LIghtJUNction/magpie-rs --json repositoryTopics
 发布配方前，对准备发布的准确版本运行 `recipkg check`、临时目录 `pack`、归档 `check` 和 `build`，核对完整递归材料、LOCK、许可证、来源及未验证项。临时归档放在源码仓库之外，验证后删除。配方负载不含源码、PNG、二进制、凭据、执行钩子或文件系统链接。
 
 本提交的配方已完成目录 check、临时 pack、归档 check 和从归档 build；归档 47 个常规文件均为 Markdown，不含文件系统链接。临时归档和提示词已删除。
+
+本轮新增Pro UI及测量器修正源码，已推送并回读 `ffe2b6f20bfa06be9cdcd8b1f15a9d8308026725`。主仓本提交更新配方1.3.1与源码指针。桌面用户认可、真实闭环及完整产品仍在推进，AUR/Release和系统替换安装尚未完成。

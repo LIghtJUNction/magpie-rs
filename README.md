@@ -4,7 +4,7 @@ Rust 重建版 Magpie：独立 CLI、本地网关与 GPUI 桌面界面。当前�
 
 ## 安装
 
-本提交是开发快照，AUR 与多平台安装包尚未发布，UI 正在交给 Pro 重新设计。正式发布后可从 [Releases](https://github.com/LIghtJUNction/magpie-rs/releases) 下载对应系统与 CPU 的安装包并核验 SHA-256。Linux、macOS、Windows 的 CLI 和桌面支持范围以每次发布说明为准；Android 制品提供 CLI，不含 GPUI APK。
+本提交是开发快照，AUR 与多平台安装包尚未发布，Pro UI 已整合并在本机编译运行，用户视觉认可与完整产品能力仍在推进。正式发布后可从 [Releases](https://github.com/LIghtJUNction/magpie-rs/releases) 下载对应系统与 CPU 的安装包并核验 SHA-256。Linux、macOS、Windows 的 CLI 和桌面支持范围以每次发布说明为准；Android 制品提供 CLI，不含 GPUI APK。
 
 Arch Linux 计划提供：`paru -S magpie-rs-bin` 安装发布二进制，或 `paru -S magpie-rs-git` 从源码构建。两个包都提供 `magpie` 命令，并与原版 `magpie`、`magpie-git`、`magpie-bin` 互斥。包替换保留用户配置。
 
