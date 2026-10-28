@@ -4,6 +4,7 @@
 
 ## 用户已确认的要求
 
+- 与原版 Magpie 的完整功能一比一还原重建：全部页面、68 个 Agent、Provider/账户/模型、协议网关、路由、Usage/会话、插件、Library/同步/备份、CLI/TUI/Web/托盘及设置逐项对照。Rust/GPUI、低内存和跨平台是实现约束，不构成删减功能的理由。当前只有 Codex 的有限闭环，未实现项保持待完成；按钮、截图、目录和“只读”占位不能代替实际行为。
 - 主实现语言 Rust；GUI 必须使用 GPUI。不得自行改成其他语言或以 WebView 替代桌面框架。平台工具、外部 runtime 和 FFI 可作为必要前提，需说明用途。
 - 本体与内存占用在满足全部功能后尽可能精简；避免 CLI 链接 GPUI、默认常驻无用服务、无界缓存、完整请求/流的重复缓冲。不要以删需求实现精简。
 - 平台：Linux（含 Arch Linux、Nix/NixOS）、macOS、Windows、Android/Termux，兼顾 headless、容器/NAS、WSL；CPU 尽可能广。至少规划 x86_64、AArch64、ARMv7、i686、RISC-V 64 的适用运行模式。最低 OS/设备版本未知，发布时按工具链和依赖明确支持矩阵。

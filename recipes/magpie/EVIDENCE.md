@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `4ff1e55a399bf0946a8afa9abffc33ea0ae83f8e`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
+当前源码 pin 为 `dd5eed87b6d14213aeb604b50dd23d6d25a03f66`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -11,6 +11,8 @@
 - CLI release为3,271,792字节，SHA256 `e3463d7717d0f8a73b5ea6d63d363e9835ce1c81dc0afbdb5c83bbf3696b86f1`；不将其与旧空目录版本或完整原版直接比较性能。
 - 当前业务的Android四ABI API23 release构建通过；LG G820上ARM64/ARMv7真实JSON/SSE转发通过。设备配置事务因`/data`祖先0771权限保护而在prepare阶段拒绝，未执行apply/restore。外部完整证据在 `/home/lightjunction/.cache/magpie-rs-build/android/validation-20261029-a7f29c61/results.json`；构建业务闭包的根Cargo与crates共21文件与当前逐字节一致。x86/i686无设备执行；旧musl/QEMU结果不冒充当前版本验收。
 - 用户已明确否决此前Pro暖白/深墨绿与名录/详情方向，并要求不得逊于原版。新任务22-visual-parity-request revision1已发Pro，对照原版浅/深截图并行做视觉、字体和独立审查。视觉未通过，旧窗口和HTML预览不构成新方案验收。
+- Pro visual r2已应用并通过Linux release/fmt/Clippy、59组件及两场景真实Codex业务复验；可复现原生font_probe的75组shaping均无缺字，主字体Adwaita Sans。合成配置的原生预览曾启动，随后用户再次否决；它未获视觉通过。源码证据为 `tests/results/desktop-visual-r2-2026-10-29.json`。
+- 用户最新明确功能必须与原版一比一还原，配方1.3.2已补充完整对照验收。23样式/完整功能请求及25标准递归rewrite合同已上传回读并发给Pro；本地并行实现真实GPUI离屏Scene渲染、事务强杀锁恢复、四协议转换与原版基线核对。冻结桥接当前强杀写入仍可能遗留需人工处理的协作锁，这项风险尚未通过恢复验收。
 - AUR/Release尚未发布，未替换安装；全部93REQ及68Agent目标保留，Web/TUI、其他Agent写入、Usage/路由/插件等仍有大量未完成要求。
 
 以下均为历史快照，其旧pin、实现边界和验收状态不描述当前版本。

@@ -92,7 +92,7 @@
 | REQ-093 | Private URL、代理和 SSRF | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
 | REQ-094 | 多平台和 WSL 边界 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 部分：当前HTTP/SSE业务的Android四ABI API23构建、ARM64/ARMv7真机转发通过；设备事务因0771祖先目录拒绝，旧musl/QEMU证据不替代当前构建，macOS/Windows/NixOS/WSL未验收 |
 | REQ-095 | 隐私工具与外部上游 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
-| REQ-100 | 视觉方向 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未通过：旧设计与Pro重设计方向均被用户否决；以原版为最低视觉基线重新设计，待原生视觉及用户验收 |
+| REQ-100 | 视觉方向 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未通过：旧设计与Pro重设计方向均被用户否决；visual r2也被否决；由Pro继续改样式，待真实GPUI渲染对照及用户验收 |
 | REQ-101 | App 和紧凑 Panel 布局 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
 | REQ-102 | 语言 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：五语文本与CJK/grapheme输入组件已测；原生IME、语言切换焦点/持久化及locale日期数字未完整验收 |
 | REQ-103 | 可访问性与操作反馈 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：焦点/取消/预览失效和真实输入组件测试通过；原生键盘、IME/读屏及新视觉仍待验收 |
