@@ -844,3 +844,9 @@ if __name__=='__main__': run(sys.argv[1:])
 `agents` 仍展示相同顺序的 68 行；已检测到的候选显示信息列。列宽、行尾空格由实际行内容决定。空 PATH 的 `ls` 返回 1、stdout 为空，stderr 为 `magpie: no supported agents found on this machine\n`。合成 Codex 存在时，目录预建与未建的样本显示一致。通过预校准的调用标记和追踪，未观察到原版执行任何这些假候选；这仅涵盖本次环境，不推出其他版本或场景的行为。
 
 完整原始输出、字节长度、SHA-256、执行器和隔离证据在 [合成候选观察记录](https://drive.google.com/file/d/1PjF0teMP85PzSEnt4T4A_YByMc3C2u3h/view)；该文件 SHA-256 为 `56230fee55d965bea0e4b8653b7298f199e8dc35e14dc696763ca3e01c824be6`。本地临时执行目录已清理。实际配置、身份认证和其他候选仍需独立观察，不能依据这一组空配置样本猜测其输出。
+
+## 两两候选和默认 Codex 路径（2026-10-29）
+
+在禁网、隔离 HOME 和空配置的条件下，对 Claude+Codex、Claude+Gemini、Codex+Gemini 分别使用显式及默认 Codex 路径观察 `agents` 和 `ls`：前者均为 68 行，后者均为对应两行，退出 0 且 stderr 为空。未设置 `CODEX_HOME` 时原版显示 `~/.codex/config.toml`。默认路径下无候选且 `~/.codex` 不存在时，`ls` 返回 1；目录存在但为空时，显示 `Codex  CLI not found` 并返回 0。35 次追踪未观察到候选程序执行；以上不推断其他配置或系统的行为。
+
+[完整 40 号观察记录](https://drive.google.com/file/d/1I3PkuUY5B6huSHP7F1Mr7qfsUxy9-Yn6/view)保留 43 次调用的原始字节、哈希与隔离证据，SHA-256 `bfe8ae99a89ab53cedb6f2f8734e9485d6d0bf2d177d6c981263ce18408a0afa`。本轮私有 fixture 与追踪进程已清理。
