@@ -10,7 +10,7 @@
 | REQ-004 | 统一模型选择和每 Agent 可见列表 | magpie | `./GLOBAL.md` | 未执行 |
 | REQ-005 | 用户可保存和切换 Profile | magpie | `./GLOBAL.md` | 未执行 |
 | REQ-010 | 多个入口反映同一状态 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：CLI、Gateway与桌面Snapshot/ActionsState共享Codex配置并实测闭环；原生窗口、Web/TUI和其他产品状态未验收 |
-| REQ-011 | 发现和列出 Agent | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：五类 Agent 的 PATH 发现与 Codex 模型/Provider/effort 只读提取已测；其它 Agent 配置和完整操作流程未实现 |
+| REQ-011 | 发现和列出 Agent | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：68项目录中保留原五项并新增八项无歧义 PATH 候选，CLI/桌面共用入口与隔离 fixture 已测；命中不等于配置可用，其他 Agent 配置和完整操作流程未实现 |
 | REQ-012 | 兼容 Agent 的公开配置格式 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：Codex公开TOML配置的有界读取和事务已测；其他Agent格式及版本兼容未实现 |
 | REQ-013 | 只做精确、可恢复的字段编辑 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：Codex七个字段、同文件系统私有事务、原字节/漂移选择性恢复及并发/SIGKILL后锁释放与中断恢复fixture已测；真实断电、Windows写入和其他Agent未验收 |
 | REQ-014 | 接入、漂移和断开 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/01-product-and-agents.md` | 部分：Codex接入/归属/漂移/恢复的组件及CLI fixture、强杀后恢复已测；真实Codex两场景离线恢复通过，窗口与其他Agent未验收 |

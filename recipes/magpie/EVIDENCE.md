@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `2ae5b9a1cfaff04325642e9f288f5debfd8c9577`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
+当前源码 pin 为 `4c60f72e6a85a9b86dad6f2d81623a5b02b46bc4`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -138,3 +138,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 ## 依赖修复（2026-10-29）
 
 源码提交 `2ae5b9a1cfaff04325642e9f288f5debfd8c9577` 将 Gateway 的 bytes 从 1.10.1 固定到 1.11.1，以包含 GHSA-434x-w66g-qw3r 修复。独立工作树、无账号合成 fixture 的全工作区测试101项通过，4个辅助进程入口按设计忽略；service 全target Clippy通过。该结果不宣称本产品的漏洞可利用性已证实、跨平台均已验收，GitHub远端告警重新扫描状态待观察。测试工作树已移除。证据见源码 `tests/results/bytes-upgrade-2026-10-29.json`。
+
+## Agent 可执行文件候选发现（2026-10-29）
+
+源码提交 `4c60f72e6a85a9b86dad6f2d81623a5b02b46bc4` 已推送。68 项目录接入 CLI/桌面共用发现入口，保留原先五项顺序（其中 Zed 是宿主），新增八项无歧义的可执行文件候选；同名候选与扫描错误单独报告，不将命中当成已连接或配置可用。Linux 合成 PATH 的 Core 测试118项通过、3个辅助入口忽略，Core 全target Clippy通过；其他 Agent 配置适配、真实系统及其他操作系统仍需验收。证据见源码 `tests/results/agent-discovery-2026-10-29.json`。
