@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `72358f5d97cd109809d37eab82fa521681aeb0e7`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
+当前源码 pin 为 `c1caccb47b683b427cb53d56a0827e352c2137b4`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -186,3 +186,7 @@ Linux 上空的祖先 `.git` 目录曾使合法外部缓存路径被误拒绝。
 ## 原版 Agent 合成候选列表（2026-10-29）
 
 源码 `72358f5d97cd109809d37eab82fa521681aeb0e7` 在已观察 Linux 空配置条件下，按原版 CLI 的字节展示 Claude、Codex、Gemini 的单独和三者同时存在场景；`agents` 68 行顺序、尾空格和 `ls` 状态/路径/退出码均以隔离原版样本为准。CLI 36 项通过、1 个由父测试调用的 helper 忽略，fmt 和严格 Clippy 通过；合成未观察场景及其他命令与上一 Rust 基线 245 次输出/退出码对照一致。原版观察见 ORIGINAL_CLI_BEHAVIOR.md，运行证据见源码 `tests/results/original-agent-candidates-2026-10-29.json`。两两组合、真实配置/账户、其他平台以及完整 Agent 功能未验收。
+
+## SSE 首事件错误导致响应头丢失（2026-10-29）
+
+原始代码可在 body 首次 poll 就报错，Hyper 在发送头之前结束连接：合成原 test06 30次中1次 RemoteDisconnected，确定性模拟在错误时写出0字节。源码 `c1caccb47b683b427cb53d56a0827e352c2137b4` 等待实际 I/O flush 后传播 SSE body 错误，不注入事件、不伪造成功，也不泄露上游错误正文。主源码的 service 56项、严格 Clippy、first-loop 26项、同二进制重复原错误测试1000次和640请求错误矩阵均通过；旧失败记录仍保留。可重放脚本和输入散列见源码 `tests/results/sse-header-flush-2026-10-29.json`。本轮仅 Linux 合成 loopback；Pro Provider 合并版本、真实 TLS 和其他平台尚未复验。
