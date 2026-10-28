@@ -142,3 +142,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 ## Agent 可执行文件候选发现（2026-10-29）
 
 源码提交 `4c60f72e6a85a9b86dad6f2d81623a5b02b46bc4` 已推送。68 项目录接入 CLI/桌面共用发现入口，保留原先五项顺序（其中 Zed 是宿主），新增八项无歧义的可执行文件候选；同名候选与扫描错误单独报告，不将命中当成已连接或配置可用。Linux 合成 PATH 的 Core 测试118项通过、3个辅助入口忽略，Core 全target Clippy通过；其他 Agent 配置适配、真实系统及其他操作系统仍需验收。证据见源码 `tests/results/agent-discovery-2026-10-29.json`。
+
+## 原版 CLI 隔离空状态观察（2026-10-29）
+
+原版 `magpie 0.1.1948` 在无账户、无网络、独立 HOME 和空 PATH 的 46 次调用与隔离、退出码、复现方法记于 `ORIGINAL_CLI_BEHAVIOR.md`。`agents` 显示全部68项；`ls` 的空态行为随 Codex 目录存在性变化，sessions JSON及 usage CSV 有不同结构。仅为空状态证据，不证明修改、账号业务或重建兼容已通过。
