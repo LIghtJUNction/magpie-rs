@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `0b2033fd6da4bd0589be64439038fd5f9c3a4da3`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
+当前源码 pin 为 `241388874b0b7051c5e441daa0b2f725192c2c86`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -168,3 +168,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 转发基准对源码 `2bbdff7` 二进制首次尝试时因网关健康信息新增字段被基准程序的整对象比较误拒绝（`candidate_admission_limits_changed`），未进入负载阶段；失败原始记录保存在工作区外。源码 `0f1a8f74615858a60f1ac6a9cae4a52b72f2940c` 修正为验证三个实际准入值并允许额外字段，8项基准合成检查通过；后续真实短测另行记录。
 
 修正后的已提交基准 runner `0f1a8f7` 对本机从源码 `2bbdff7` 构建的 release CLI 完成新一轮短测，正确性为 true、失败0。二进制与runner散列、每格数据、采样范围及不可推断的事项保存在源码 `benchmark/results/forwarding-2026-10-29-current-short.json`；原始带主机遥测记录保留在源码树外。仅为单次短时参考。
+
+## 原版 CLI Agent 空状态（2026-10-29）
+
+源码 `241388874b0b7051c5e441daa0b2f725192c2c86` 已将隔离原版观察用于实际 CLI：无候选时 `agents` 的68行输出、空 `ls` 退出1及 Codex 仅有状态目录的提示通过进程 fixture；`agents --json` 的既有空结构不变。Linux CLI 全target测试27项通过、1辅助入口忽略，Clippy通过。真实已安装 Agent 的原版非空显示和其他命令仍需重建，未测试其他系统。证据见源码 `tests/results/original-cli-empty-2026-10-29.json`。
