@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `241388874b0b7051c5e441daa0b2f725192c2c86`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
+当前源码 pin 为 `812756d81253c3a798d328bd99fb6209fa37270c`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -174,3 +174,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 源码 `241388874b0b7051c5e441daa0b2f725192c2c86` 已将隔离原版观察用于实际 CLI：无候选时 `agents` 的68行输出、空 `ls` 退出1及 Codex 仅有状态目录的提示通过进程 fixture；`agents --json` 的既有空结构不变。Linux CLI 全target测试27项通过、1辅助入口忽略，Clippy通过。真实已安装 Agent 的原版非空显示和其他命令仍需重建，未测试其他系统。证据见源码 `tests/results/original-cli-empty-2026-10-29.json`。
 
 源码 `241388874b0b7051c5e441daa0b2f725192c2c86` 的 Linux 无显示工作区随后统一运行 `cargo test --offline --locked --workspace --all-targets`：235 项通过、4个辅助入口忽略；不包括独立桌面工作区或尚未合并的 Pro 版本。
+
+## 旧网关配置协议回归修复（2026-10-29）
+
+此前扩展四协议后，未指定上游协议的旧配置错误地将 Messages 发往上游：新增回归先收到502、预期501，原 first-loop 仅25/26通过。源码 `812756d81253c3a798d328bd99fb6209fa37270c` 恢复旧入口限制，合成 fixture 验证 Messages/Gemini 拒绝且零上游请求；service 55项、严格 Clippy 与单次26项 first-loop TCP回归通过。另有早先报告的首个 SSE 失败事件响应头时序不确定，单次通过不代表其已修复。证据见源码 `tests/results/protocol-legacy-guard-2026-10-29.json`。
