@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `00dc72411d82891d4006548c6b31fb11b3f6ac5a`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
+当前源码 pin 为 `f20439bcc03d527f8c713b1b22c066604e16ba7a`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -198,3 +198,7 @@ Linux 上空的祖先 `.git` 目录曾使合法外部缓存路径被误拒绝。
 ## Codex 锁描述符释放（2026-10-29）
 
 源码 `00dc72411d82891d4006548c6b31fb11b3f6ac5a` 在正常结束事务时显式释放 OS 锁，再关闭描述符。合成测试复现原 guard 关闭而共享描述符仍在时下一次误报 LockBusy；修复后同一保留副本不再阻止新 guard，持锁期间排他仍有效。修复文件与独立合并版字节一致，后者 core 8线程10轮各74项通过、完整工作区8线程289项通过；详见源码 `tests/results/codex-lock-release-2026-10-29.json`。Pro 原始并行失败没有锁持有者现场，原因不能确定为该路径；进程被强杀时 Drop 无法执行，遗留的继承描述符仍可使锁持续到关闭。仅 Linux 合成 fixture 验证。
+
+## 两两 Agent 候选及默认路径（2026-10-29）
+
+源码 `f20439bcc03d527f8c713b1b22c066604e16ba7a` 按40次原版合成样本补齐三种两两候选、默认 Codex 路径和目录缺失/空目录的输出，renderer/进程字节均对照。主源码 CLI 38项通过、1 helper 忽略，fmt和严格 Clippy 通过；独立样本的611组对照保留此前不适用分支行为。证据见 `ORIGINAL_CLI_BEHAVIOR.md` 和源码 `tests/results/original-agent-pairs-default-2026-10-29.json`。两两候选加空 Codex 目录、真实配置和账户仍未验收，Pro候选合并后的完整 CLI 回归待重跑。
