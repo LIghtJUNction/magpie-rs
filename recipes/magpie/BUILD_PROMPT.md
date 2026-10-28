@@ -17,7 +17,7 @@
 
 ## 阅读顺序与递归合同
 
-1. 本文、GLOBAL.md、DEPENDENCIES.md、PERFORMANCE.md、OPTIMIZATION.md、MIGRATION.md、GENERATED_LAYOUT.md、PUBLISHING.md、ORIGINAL_PARITY.md、ORIGINAL_CLI_BEHAVIOR.md。
+1. 本文、GLOBAL.md、DEPENDENCIES.md、PERFORMANCE.md、OPTIMIZATION.md、MIGRATION.md、GENERATED_LAYOUT.md、PUBLISHING.md、ORIGINAL_PARITY.md、ORIGINAL_CLI_BEHAVIOR.md、PARITY_VERIFICATION.md。
 2. 依赖 `interfaces`：完整阅读其 BUILD_PROMPT.md、ACCEPTANCE.md、specs/08、specs/10、UI_REFERENCE.md。
 3. `interfaces` 的依赖 `gateway`：完整阅读其入口、验收及 specs/03、05、06。
 4. `gateway` 的依赖 `core`：完整阅读其入口、验收及 specs/01、02、04、07、09。
@@ -33,7 +33,9 @@
 
 用户约束优先于旧 GLOBAL.md 的实现自由度。其余行为以对应编号规格为准。文字视觉参考替代图片交付。未知参数和外部协议版本先确认或标为未验证，不猜常量。GLOBAL.md 中的模型例子是固定历史样例，不表示当前供应商承诺。
 
-生成实现源码位于 `generated/magpie-rs-source/` 固定提交的 Git 子模块中。先核对子模块 remote、pin、工作区状态和 EVIDENCE.md，再阅读并复用现有 Rust 原型，逐项对照 93 条 REQ；不能把原型状态当作需求已完成。具体工作约定见 GENERATED_LAYOUT.md。`generated/` 根目录只放源码仓库子模块，不放平铺源码；源码、缓存和运行结果都不写入 `recipes/`，配方归档只能包含配方 Markdown 材料。
+在此仓库继续开发时，生成实现源码位于 `generated/magpie-rs-source/` 固定提交的 Git 子模块中。先核对子模块 remote、pin、工作区状态和 EVIDENCE.md，再阅读并复用现有 Rust 原型，逐项对照 93 条 REQ；不能把原型状态当作需求已完成。具体工作约定见 GENERATED_LAYOUT.md。`generated/` 根目录只放源码仓库子模块，不放平铺源码；源码、缓存和运行结果都不写入 `recipes/`，配方归档只能包含配方 Markdown 材料。
+
+检验配方能否独立重建时，在独立目录只根据归档内完整配方、递归材料及明确的外部运行前提生成实现；不得读取或复用本项目的生成源码、原版二进制或历史实现。之后可将生成的软件与固定原版在隔离合成输入上对照，原版只作为验收参考，不作为生成实现的运行时依赖。独立重建通过与现有原型通过分别记录。
 
 在该源码子模块内交付可复现构建说明、运行/安装方式、平台能力矩阵、93 条 REQ 状态、自动化/人工验收和资源测量记录。Nix/Arch 包装也要给可重复安装/卸载流程。引用外部工具不意味着已经把它打进配方。迁移与 Recipkg 解析成功不证明生成软件已完成。
 

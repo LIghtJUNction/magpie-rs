@@ -2,7 +2,9 @@
 
 本文件记录无法从固定快照静态确认，或需要真实外部条件才能验证的部分。它不表示功能不存在。
 
-## 本次没有做的验证
+## 最初提取时未做的验证
+
+下列是最初提取时的历史边界，不是当前工作区的实时状态。后续已执行的隔离原版 CLI、部分 Rust 重建、本机测试及设备观察分别见 `ORIGINAL_CLI_BEHAVIOR.md`、`EVIDENCE.md`、`COVERAGE.md` 和 `PERFORMANCE.md`；这些增量没有消除剩余的完整产品、外部账户与跨平台缺口。
 
 - 没有运行、构建或测试原始软件；没有用真实账户请求任何上游 Provider。
 - 没有在 macOS、Windows、Linux、Docker 或 WSL 启动桌面/网关/浏览器/TUI，也没有用真实 Agent 校验配置 round-trip。

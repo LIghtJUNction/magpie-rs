@@ -1,8 +1,10 @@
 # 整机验收
 
-以下端到端场景尚未执行。COVERAGE.md 覆盖全部 93 条 REQ；三个递归组件的 ACCEPTANCE.md 保存各条正常/失败/边界场景。当前只对 REQ-011、REQ-030、REQ-034 的有限组件路径做了构建和基准检查，详见 EVIDENCE.md；这些结果不代表完整用户流程或供应商转发验收通过。
+以下完整端到端场景尚未全部执行。COVERAGE.md 覆盖全部 93 条 REQ；三个递归组件的 ACCEPTANCE.md 保存各条正常/失败/边界场景。后续已对部分 Codex、Gateway、协议、CLI 和设备路径执行有限检查，准确版本与范围见 EVIDENCE.md 和 COVERAGE.md；这些结果不代表完整用户流程或真实供应商兼容通过。
 
-## 已执行的组件级检查
+## 早期组件级检查（历史记录）
+
+以下是早期空目录原型的观察，不能用来描述当前版本；之后的增量和结果以 EVIDENCE.md、COVERAGE.md 为准。
 
 - Linux x86_64 release CLI 构建成功；`cargo clippy --release --locked -p magpie-cli -- -D warnings`、workspace 格式检查，以及 `cargo fmt --manifest-path apps/desktop/Cargo.toml --check`（GPUI package）成功。
 - 合成 Codex TOML fixture 的 CLI Agent 发现路径、status JSON 和 config path JSON 均通过输出校验；没有读取真实用户配置，也没有验收真实 Agent 或多入口状态一致性（REQ-011 部分）。

@@ -4,11 +4,13 @@
 graph TD
   magpie --> interfaces[magpie-interfaces]
   magpie --> quality[software-quality]
+  magpie --> design[design-directions]
   interfaces --> gateway[magpie-gateway]
   gateway --> core[magpie-core]
+  design --> foundation[design-foundations]
 ```
 
-四个 magpie 节点是产品软件重建配方，software-quality 是跨组件设计/代码/性能合同；所有 source 都是有效的同仓配方目录。core 和 quality 没有配方依赖，递归在这两处结束。不要再把同一核心状态重建成多个不一致副本。
+四个 magpie 节点是产品软件重建配方，software-quality 是跨组件设计/代码/性能合同；这五个配方由有效的同仓相对 source 引入。design-directions 是固定 Git 提交的设计合同，递归依赖同样固定的 design-foundations。core、quality 和 foundation 不再声明递归配方依赖。不要再把同一核心状态重建成多个不一致副本。
 
 | 类型 | 名称和职责 | 交付/验收边界 |
 | --- | --- | --- |
@@ -28,3 +30,5 @@ graph TD
 ## 设计方向与基础合同
 
 根别名 `design` 使用 `https://github.com/recipkg/design-directions.git` 完整固定提交 `6fdba350d1effa2d50dc0185095bb91ca7a699ee`（配方 0.1.2），递归 `foundation` 为 `https://github.com/recipkg/design-foundations.git` 的 `8c5bf1f1e40719789cf51bc0dfd8f5aeecae0538`（0.1.1）。无运行时 API、库或服务；输入是本产品页面/任务/平台/状态，输出为 UI_DIRECTION.md 中的具体取舍及实际验收记录。新增 Agent 协作合同仅适用于实际存在的 Agent 界面，不改变 Magpie 既有产品范围。两包均为 UTF-8 Markdown；无更深依赖、未发现递归环。保留现有 quality 接口，二者共同约束界面质量，具体原版行为与用户要求优先。两包没有独立 LICENSE 或 COVERAGE 文件，授权/覆盖边界按来源实际记录，不标为已解决。
+
+2026-10-29 查阅 [Recipkg 标准库目录](https://github.com/recipkg/standard-library)：其中 design-directions 和 design-foundations 与上述已固定的设计合同相符；Agent SDK、聊天应用及其他软件配方各自覆盖不同软件，不能仅因名称相近视为 Magpie 的运行依赖或证明协议兼容。未新增无关依赖；所有候选的来源、许可、覆盖及递归关系仍应在未来实际复用前重新核验。
