@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `dd5eed87b6d14213aeb604b50dd23d6d25a03f66`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
+当前源码 pin 为 `4f689fa0d268ed623f4cf1de94caa04ab14140e5`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -12,7 +12,7 @@
 - 当前业务的Android四ABI API23 release构建通过；LG G820上ARM64/ARMv7真实JSON/SSE转发通过。设备配置事务因`/data`祖先0771权限保护而在prepare阶段拒绝，未执行apply/restore。外部完整证据在 `/home/lightjunction/.cache/magpie-rs-build/android/validation-20261029-a7f29c61/results.json`；构建业务闭包的根Cargo与crates共21文件与当前逐字节一致。x86/i686无设备执行；旧musl/QEMU结果不冒充当前版本验收。
 - 用户已明确否决此前Pro暖白/深墨绿与名录/详情方向，并要求不得逊于原版。新任务22-visual-parity-request revision1已发Pro，对照原版浅/深截图并行做视觉、字体和独立审查。视觉未通过，旧窗口和HTML预览不构成新方案验收。
 - Pro visual r2已应用并通过Linux release/fmt/Clippy、59组件及两场景真实Codex业务复验；可复现原生font_probe的75组shaping均无缺字，主字体Adwaita Sans。合成配置的原生预览曾启动，随后用户再次否决；它未获视觉通过。源码证据为 `tests/results/desktop-visual-r2-2026-10-29.json`。
-- 用户最新明确功能必须与原版一比一还原，配方1.3.2已补充完整对照验收。23样式/完整功能请求及25标准递归rewrite合同已上传回读并发给Pro；本地并行实现真实GPUI离屏Scene渲染、事务强杀锁恢复、四协议转换与原版基线核对。冻结桥接当前强杀写入仍可能遗留需人工处理的协作锁，这项风险尚未通过恢复验收。
+- 用户最新明确功能必须与原版一比一还原，配方1.3.2已补充完整对照验收。23样式/完整功能请求及25标准递归rewrite合同已上传回读并发给Pro；本地并行实现真实GPUI离屏Scene渲染、事务强杀锁恢复、四协议转换与原版基线核对。这一阶段的旧源码在强杀写入后可能遗留需人工处理的协作锁；后续锁恢复结果见下方最新记录。
 - AUR/Release尚未发布，未替换安装；全部93REQ及68Agent目标保留，Web/TUI、其他Agent写入、Usage/路由/插件等仍有大量未完成要求。
 
 以下均为历史快照，其旧pin、实现边界和验收状态不描述当前版本。
@@ -127,4 +127,10 @@ Git暂存索引条目摘要（git ls-files --stage stdout SHA-256）：`6066d3d7
 
 配方1.3.3复用固定design-directions及递归foundation，完整材料已读，具体作用/备选/验收见UI_DIRECTION.md。包含完整观察与设计依赖的归档已生成，离线check和完整rewrite提示词的检查分别记录。两标准库包当前pin没有独立LICENSE/COVERAGE，不编造其覆盖和授权。
 
-Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgbYEC）；它是设计合同，不能当原生Scene或用户认可。24观察和25完整上下文已更新同一文件ID并读回，25当前对应配方1.3.3。任务中途界面曾报告delivery timeout，已通过26续接现有工作并要求尽早回传代码检查点；33源码交付与实际合并验证尚未完成。历史30/31/32保留。源码gitlink仍为dd5eed87b6d14213aeb604b50dd23d6d25a03f66；本地新锁实现/测试与GPUI渲染工具尚未发布，不能混作该固定源码的结果。完整功能与视觉验收继续未完成。
+Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgbYEC）；它是设计合同，不能当原生Scene或用户认可。24观察和25完整上下文已更新同一文件ID并读回，25当前对应配方1.3.3。任务中途界面曾报告delivery timeout，已通过26续接现有工作并要求尽早回传代码检查点；33源码交付与实际合并验证尚未完成。历史30/31/32保留。该条记录时源码gitlink为dd5eed87b6d14213aeb604b50dd23d6d25a03f66，新锁实现与GPUI渲染工具尚未发布；最新结果见下方。完整功能与视觉验收继续未完成。
+
+## 强杀恢复与原生 Scene（2026-10-29）
+
+源码提交 `4f689fa0d268ed623f4cf1de94caa04ab14140e5` 已推送：Codex 事务使用系统锁，进程退出后内核释放持锁，保留同一 inode 的旧锁入口防止旧客户端并发写；未知旧锁仍不自动删除。隔离 SIGKILL 组件测试12项、事务集成测试48项通过，辅助进程入口按测试设计忽略；整工作区并行测试通过，Core Clippy通过。macOS/Android原生、Windows写入及非协作方最后一次检查与rename之间的竞争仍未通过。
+
+新增可选测试 feature 导出实际 GPUI Scene，默认构建不启用；900×560 合成数据的旧r2界面已实际渲染，PNG SHA-256 `777d6aff0ec457e63c8e8e89a17ccd15b48a2d38ce7995eb8a0b43342cd23c56`。GUI组件59项及visual-test全target Clippy通过；Scene不是实际窗口输入/IME/读屏或用户认可，r2仍被否决。逐项证据见源码 `tests/results/crash-lock-and-native-scene-2026-10-29.json`。
