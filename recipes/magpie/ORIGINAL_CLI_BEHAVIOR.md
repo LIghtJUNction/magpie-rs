@@ -830,3 +830,17 @@ if __name__=='__main__': run(sys.argv[1:])
 ```
 
 本次仅保留此 Markdown 交付物；临时执行器及 46 份运行记录工作副本已经删除，必要短输出、哈希、进程和隔离证据已写入本文。没有清理旧 28/24 证据，没有改变宿主安装、服务、设置、账户或项目工作区。
+
+## 合成候选可执行文件的原版行为（2026-10-29）
+
+在禁止网络、隔离 HOME 的 bwrap 环境中，分别和组合放置可执行的假 `claude`、`codex`、`gemini`，保留相互独立的 19 次运行记录，其中 16 次为 `agents` / `ls`。这些样本不含真实账户、凭据或配置文件。三者同时存在时，`magpie ls` 的退出码为 0、标准错误为空，标准输出为：
+
+```text
+  Claude Code  —  ·  effort —  ~/.claude/settings.json
+  Codex        —  ·  effort —  /fixture/codex/config.toml
+  Gemini CLI   auth —  ·  —    ~/.gemini/settings.json
+```
+
+`agents` 仍展示相同顺序的 68 行；已检测到的候选显示信息列。列宽、行尾空格由实际行内容决定。空 PATH 的 `ls` 返回 1、stdout 为空，stderr 为 `magpie: no supported agents found on this machine\n`。合成 Codex 存在时，目录预建与未建的样本显示一致。通过预校准的调用标记和追踪，未观察到原版执行任何这些假候选；这仅涵盖本次环境，不推出其他版本或场景的行为。
+
+完整原始输出、字节长度、SHA-256、执行器和隔离证据在 [合成候选观察记录](https://drive.google.com/file/d/1PjF0teMP85PzSEnt4T4A_YByMc3C2u3h/view)；该文件 SHA-256 为 `56230fee55d965bea0e4b8653b7298f199e8dc35e14dc696763ca3e01c824be6`。本地临时执行目录已清理。实际配置、身份认证和其他候选仍需独立观察，不能依据这一组空配置样本猜测其输出。
