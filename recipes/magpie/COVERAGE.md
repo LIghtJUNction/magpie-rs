@@ -30,8 +30,8 @@
 | REQ-028 | 计划与本机订阅使用限制 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
 | REQ-029 | 账号和模型状态对外说明 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
 | REQ-030 | 本地 Gateway 生命周期 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：Linux真实TCP启动、健康/端口冲突/限额/启动超时fixture已测；Android双ARM真机HTTP/SSE通过，桌面生命周期及各系统安装恢复未验收 |
-| REQ-031 | 请求入口与模型标识 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：仅loopback HTTP Provider的Chat/Responses模型重写、JSON/SSE及真实Codex已测；其余协议和外部TLS未实现 |
-| REQ-032 | 协议转换和流式行为 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：Chat/Responses透传、UTF-8/CR-LF/BOM、工具增量、流终止/失败/取消已测；跨协议转换及Messages/Gemini未实现 |
+| REQ-031 | 请求入口与模型标识 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：loopback 合成上游的四协议入口/模型转换以及 Codex 原生链路已测；外部TLS/真实上游和全部字段未验收 |
+| REQ-032 | 协议转换和流式行为 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：四协议12种定向纯转换、部分实际 HTTP/SSE 转换及取消/错误已测；官方全部字段、流事件和上游兼容未验收 |
 | REQ-033 | 错误、状态码和请求归属 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：固定脱敏错误、上游错误/不完整流与并发拒绝已测；完整请求归属/Usage和外部上游兼容未实现 |
 | REQ-034 | 模型目录契约 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：公开模型目录CLI/HTTP及桌面真实gateway inspect已测；configured不表示健康，上游发现/缓存更新未实现 |
 | REQ-035 | 本机访问和远程鉴权 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：仅字面loopback与Host/Origin等访问限制已测；LAN分享、受限key和远程鉴权未实现 |
