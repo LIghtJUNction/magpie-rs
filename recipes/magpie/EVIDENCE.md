@@ -2,7 +2,7 @@
 
 ## 当前业务与桌面操作快照（2026-10-29）
 
-当前源码 pin 为 `4c60f72e6a85a9b86dad6f2d81623a5b02b46bc4`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
+当前源码 pin 为 `71d53e0a8823000e7494a280b6323b1200e4d0b9`，已推送并回读远端 main；父仓库固定此 gitlink。子模块另有尚未提交的 benchmark/packaging 工作，未包含在该 pin。
 
 - bounded loopback HTTP Provider 已真实转发 Chat/Responses JSON及SSE，支持模型重写、固定脱敏错误、有界并发/正文/事件和取消；外部HTTPS、跨协议转换等仍未实现。
 - Codex七字段事务支持只读预览、显式保存、归属重读和离线恢复；不变时恢复原字节，漂移时保留外部字段。私有暂存/日志有界，Linux/macOS/Android写入路径已实现，Windows明确禁写；真实断电及全部设备场景未验收。
@@ -146,3 +146,7 @@ Pro第三轮已回写27原版对照设计（Drive 1JmaVpvEunCXVnwLdny_Lz1Og0TMgb
 ## 原版 CLI 隔离空状态观察（2026-10-29）
 
 原版 `magpie 0.1.1948` 在无账户、无网络、独立 HOME 和空 PATH 的 46 次调用与隔离、退出码、复现方法记于 `ORIGINAL_CLI_BEHAVIOR.md`。`agents` 显示全部68项；`ls` 的空态行为随 Codex 目录存在性变化，sessions JSON及 usage CSV 有不同结构。仅为空状态证据，不证明修改、账号业务或重建兼容已通过。
+
+## GPUI 自定义尺寸渲染工具（2026-10-29）
+
+源码提交 `71d53e0a8823000e7494a280b6323b1200e4d0b9` 增加 `render_preview --size WIDTHxHEIGHT`；在隔离工作树基线 `2ae5b9a` 的旧 r2 UI 上，实际离屏场景生成 1440×900 一幅和 360×760 浅/深色六幅，并核对图像尺寸；越界输入退出1。测试夹具无真实账号，临时工作树已移除。旧 r2 已被用户否决，这不是 Pro r3、原生窗口交互或用户视觉验收。证据见源码 `tests/results/preview-viewport-2026-10-29.json`。
