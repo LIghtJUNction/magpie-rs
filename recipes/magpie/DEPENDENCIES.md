@@ -24,3 +24,7 @@ graph TD
 ## 质量依赖的集成验收
 
 `quality` 的别名固定到同仓 software-quality 配方，完整原文进入 `.deps/quality/`。它适用于核心、网关、所有界面和交付文档：对照设计层级/窄屏/状态、单一事实来源/错误释放、基线与重复测量逐项给证据。用户选定GPUI和原任务的克制紫色选中/图表可保留；不能把反模板化要求误解为禁止有任务理由的颜色。质量合同的通过不能只由编译或配方校验证明。
+
+## 设计方向与基础合同
+
+根别名 `design` 使用 `https://github.com/recipkg/design-directions.git` 完整固定提交 `2546cea48637585ec2e83b297b12b08548f9d15f`（配方 0.1.1），递归 `foundation` 为 `https://github.com/recipkg/design-foundations.git` 的 `8c5bf1f1e40719789cf51bc0dfd8f5aeecae0538`（0.1.1）。无运行时 API、库或服务；输入是本产品页面/任务/平台/状态，输出为 UI_DIRECTION.md 中的具体取舍及实际验收记录。两包均为 UTF-8 Markdown；无更深依赖、未发现递归环。保留现有 quality 接口，二者共同约束界面质量，具体原版行为与用户要求优先。两包没有独立 LICENSE 或 COVERAGE 文件，授权/覆盖边界按来源实际记录，不标为已解决。

@@ -97,3 +97,7 @@
 | REQ-102 | 语言 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：五语文本与CJK/grapheme输入组件已测；原生IME、语言切换焦点/持久化及locale日期数字未完整验收 |
 | REQ-103 | 可访问性与操作反馈 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：焦点/取消/预览失效和真实输入组件测试通过；原生键盘、IME/读屏及新视觉仍待验收 |
 | REQ-104 | 参考截图与产品数据 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
+
+## 设计合同依赖（2026-10-29）
+
+配方 1.3.3 增加固定版本 design-directions 及递归 design-foundations，已完成来源/全部正文阅读与产品作用范围、备选取舍和验收合同集成。现有 93 REQ/68 Agent 是基线，原版额外观察仍需纳入；全部功能及用户视觉认可继续未完成。依赖归档与实际界面/功能验证分别记录，不能将设计材料阅读算作通过。

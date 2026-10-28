@@ -1,6 +1,6 @@
 # 重建 Magpie
 
-实现跨平台 AI 编程 Agent、Provider、账户、模型目录、网关、路由、Usage、Library 和同步管理软件。交付 CLI 与 GPUI 桌面应用，并完成规格中的托盘、Web、TUI 模式。完整目标包含 93 条 REQ，不能把当前 Rust 原型的能力当成完成范围。
+实现跨平台 AI 编程 Agent、Provider、账户、模型目录、网关、路由、Usage、Library 和同步管理软件。交付 CLI 与 GPUI 桌面应用，并完成规格中的托盘、Web、TUI 模式。现有合同包含 93 条 REQ 和 68 类 Agent，是必须保留的基线；针对选定原版发现的额外能力继续补充，不把该数量当作功能上限。不能把当前 Rust 原型的能力当成完成范围。
 
 ## 用户已确认的要求
 
@@ -17,14 +17,15 @@
 
 ## 阅读顺序与递归合同
 
-1. 本文、GLOBAL.md、DEPENDENCIES.md、PERFORMANCE.md、OPTIMIZATION.md、MIGRATION.md、GENERATED_LAYOUT.md、PUBLISHING.md。
+1. 本文、GLOBAL.md、DEPENDENCIES.md、PERFORMANCE.md、OPTIMIZATION.md、MIGRATION.md、GENERATED_LAYOUT.md、PUBLISHING.md、ORIGINAL_PARITY.md。
 2. 依赖 `interfaces`：完整阅读其 BUILD_PROMPT.md、ACCEPTANCE.md、specs/08、specs/10、UI_REFERENCE.md。
 3. `interfaces` 的依赖 `gateway`：完整阅读其入口、验收及 specs/03、05、06。
 4. `gateway` 的依赖 `core`：完整阅读其入口、验收及 specs/01、02、04、07、09。
 5. 依赖 `quality`：完整阅读 `.deps/quality/BUILD_PROMPT.md` 与 ACCEPTANCE.md，将设计、代码组织、错误/取消处理、性能测量要求应用到所有软件组件；它是质量合同，不是运行时库或另一个服务。项目明确的 Rust/GPUI、任务视觉方向和更具体的性能合同优先。
-6. 根 ACCEPTANCE.md、COVERAGE.md；EVIDENCE.md 与 OPEN_QUESTIONS.md 解释来源及未验证边界，不得当作既有实现成功证据。
+6. 依赖 `design`：完整阅读 `.deps/design/BUILD_PROMPT.md`、DIRECTIONS.md、EVALUATION.md、ACCEPTANCE.md 和 SOURCES.md，再阅读其 `.deps/foundation/` 的全部设计合同。按 UI_DIRECTION.md 中的产品取舍应用到 GPUI 主窗/面板、Web 和 TUI；CLI 采用适用的信息层级、文案与反馈部分。它们是设计与验收合同，不是运行时库；原版行为、用户指定 Rust/GPUI 和既有视觉基线优先。
+7. 根 ACCEPTANCE.md、COVERAGE.md；EVIDENCE.md 与 OPEN_QUESTIONS.md 解释来源及未验证边界，不得当作既有实现成功证据。
 
-归档内路径分别是 `.deps/interfaces/`、`.deps/interfaces/.deps/gateway/`、`.deps/interfaces/.deps/gateway/.deps/core/`。作者目录里按各 RECIPE.md 的相对 source 找到同名材料。产品软件依赖都要实际重建并集成，不得只放占位 API；quality 依赖应落实为可检查的质量要求，不生成占位程序。具体模块组织可调整，但数据、授权、账务和配置所有权必须只有一致的事实来源。
+归档内路径分别是 `.deps/interfaces/`、`.deps/interfaces/.deps/gateway/`、`.deps/interfaces/.deps/gateway/.deps/core/`。作者目录里按各 RECIPE.md 的相对 source 找到同名材料。产品软件依赖都要实际重建并集成，不得只放占位 API；quality 和 design（含递归 foundation）依赖应落实为可检查的质量/设计要求，不生成占位程序。具体模块组织可调整，但数据、授权、账务和配置所有权必须只有一致的事实来源。
 
 核心产出 Agent/Provider/route/settings 状态；网关使用该状态执行鉴权、路由、转发、计量与插件；所有界面调用同一状态/服务。集成通过标准：CLI 改模型后 GPUI/TUI/Web 看见相同状态；请求按所选模型实际到本地 fixture 并有一次最终 Usage；断开只恢复 Magpie 拥有的字段。
 
