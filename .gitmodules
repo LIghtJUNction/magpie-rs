@@ -31,3 +31,6 @@
 [submodule ".agents/skills/update-recipkg-in-project"]
 	path = .agents/skills/update-recipkg-in-project
 	url = https://github.com/recipkg/update-recipkg-in-project.git
+[submodule "generated/magpie-rs-source"]
+	path = generated/magpie-rs-source
+	url = https://github.com/LIghtJUNction/magpie-rs-source.git

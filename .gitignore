@@ -1,9 +1,4 @@
-/magpie
-/magpie.exe
-/magpie.app/
-/dist/
-/magpie-dev
-/rsrc_windows_*.syso
-/magpie-dev-backend
-/magpie-dev.new
-/internal/update/launcher-*.com
+target/
+dist/
+__pycache__/
+*.py[cod]
