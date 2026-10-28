@@ -303,76 +303,76 @@ time,agent,requested_model,provider,host,model,served_model,swapped,effort,input
 }
 ```
 
-`agents` 在 Codex 目录不存在时的完整名称/空态列表（68 行）：
+`agents` 在 Codex 目录不存在时的完整名称/空态列表（68 行）： 为保留行尾空格且便于查看，下方每个 `\u0020` 表示一个 ASCII 空格；其余内容为实际输出。
 
 ```text
-  Claude Code               not detected  
-  Claude Desktop            not detected  
-  Claude Science            not detected  
-  Codex                     not detected  
-  Gemini CLI                not detected  
-  Antigravity CLI           not detected  
-  OpenCode                  not detected  
-  OpenChamber               not detected  
-  MiMo Code                 not detected  
-  DevEco Code               not detected  
-  Pi                        not detected  
-  StepCode                  not detected  
-  MothX                     not detected  
-  PenguinHarness            not detected  
-  Aside                     not detected  
-  OmO                       not detected  
-  Prime Agent               not detected  
-  Goose                     not detected  
-  Cursor CLI                not detected  
-  Cursor Private Inference  not detected  
-  Zed                       not detected  
-  VS Code                   not detected  
-  VS Code Insiders          not detected  
-  VSCodium                  not detected  
-  Zoo Code                  not detected  
-  Copilot (JetBrains)       not detected  
-  JetBrains Air             not detected  
-  Copilot CLI               not detected  
-  Crush                     not detected  
-  DeepSeek Harness          not detected  
-  Reasonix Studio           not detected  
-  Command Code              not detected  
-  fx                        not detected  
-  omp                       not detected  
-  Devin                     not detected  
-  Hermes Agent              not detected  
-  Mister Morph              not detected  
-  Kimi Code                 not detected  
-  Qwen Code                 not detected  
-  Muse Code                 not detected  
-  Empryo                    not detected  
-  Ante                      not detected  
-  AstrBot                   not detected  
-  jcode                     not detected  
-  MiniMax Code              not detected  
-  Droid                     not detected  
-  Cline                     not detected  
-  Qoder                     not detected  
-  Qoder CN                  not detected  
-  Grok Build                not detected  
-  Grok App                  not detected  
-  ZCode                     not detected  
-  WorkBuddy                 not detected  
-  WorkBuddy AI              not detected  
-  CodeBuddy                 not detected  
-  Pencil                    not detected  
-  OpenPencil                not detected  
-  NewMax                    not detected  
-  Raycast                   not detected  
-  Kiro Crew                 not detected  
-  T3 Code                   not detected  
-  OpenHanako                not detected  
-  AtomCode                  not detected  
-  Snow CLI                  not detected  
-  Alma                      not detected  
-  Cindy                     not detected  
-  AionUi                    not detected  
+  Claude Code               not detected\u0020\u0020
+  Claude Desktop            not detected\u0020\u0020
+  Claude Science            not detected\u0020\u0020
+  Codex                     not detected\u0020\u0020
+  Gemini CLI                not detected\u0020\u0020
+  Antigravity CLI           not detected\u0020\u0020
+  OpenCode                  not detected\u0020\u0020
+  OpenChamber               not detected\u0020\u0020
+  MiMo Code                 not detected\u0020\u0020
+  DevEco Code               not detected\u0020\u0020
+  Pi                        not detected\u0020\u0020
+  StepCode                  not detected\u0020\u0020
+  MothX                     not detected\u0020\u0020
+  PenguinHarness            not detected\u0020\u0020
+  Aside                     not detected\u0020\u0020
+  OmO                       not detected\u0020\u0020
+  Prime Agent               not detected\u0020\u0020
+  Goose                     not detected\u0020\u0020
+  Cursor CLI                not detected\u0020\u0020
+  Cursor Private Inference  not detected\u0020\u0020
+  Zed                       not detected\u0020\u0020
+  VS Code                   not detected\u0020\u0020
+  VS Code Insiders          not detected\u0020\u0020
+  VSCodium                  not detected\u0020\u0020
+  Zoo Code                  not detected\u0020\u0020
+  Copilot (JetBrains)       not detected\u0020\u0020
+  JetBrains Air             not detected\u0020\u0020
+  Copilot CLI               not detected\u0020\u0020
+  Crush                     not detected\u0020\u0020
+  DeepSeek Harness          not detected\u0020\u0020
+  Reasonix Studio           not detected\u0020\u0020
+  Command Code              not detected\u0020\u0020
+  fx                        not detected\u0020\u0020
+  omp                       not detected\u0020\u0020
+  Devin                     not detected\u0020\u0020
+  Hermes Agent              not detected\u0020\u0020
+  Mister Morph              not detected\u0020\u0020
+  Kimi Code                 not detected\u0020\u0020
+  Qwen Code                 not detected\u0020\u0020
+  Muse Code                 not detected\u0020\u0020
+  Empryo                    not detected\u0020\u0020
+  Ante                      not detected\u0020\u0020
+  AstrBot                   not detected\u0020\u0020
+  jcode                     not detected\u0020\u0020
+  MiniMax Code              not detected\u0020\u0020
+  Droid                     not detected\u0020\u0020
+  Cline                     not detected\u0020\u0020
+  Qoder                     not detected\u0020\u0020
+  Qoder CN                  not detected\u0020\u0020
+  Grok Build                not detected\u0020\u0020
+  Grok App                  not detected\u0020\u0020
+  ZCode                     not detected\u0020\u0020
+  WorkBuddy                 not detected\u0020\u0020
+  WorkBuddy AI              not detected\u0020\u0020
+  CodeBuddy                 not detected\u0020\u0020
+  Pencil                    not detected\u0020\u0020
+  OpenPencil                not detected\u0020\u0020
+  NewMax                    not detected\u0020\u0020
+  Raycast                   not detected\u0020\u0020
+  Kiro Crew                 not detected\u0020\u0020
+  T3 Code                   not detected\u0020\u0020
+  OpenHanako                not detected\u0020\u0020
+  AtomCode                  not detected\u0020\u0020
+  Snow CLI                  not detected\u0020\u0020
+  Alma                      not detected\u0020\u0020
+  Cindy                     not detected\u0020\u0020
+  AionUi                    not detected\u0020\u0020
   Lody                      not detected
 ```
 
