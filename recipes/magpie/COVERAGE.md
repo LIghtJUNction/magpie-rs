@@ -1,6 +1,6 @@
 # 需求覆盖索引
 
-93 个唯一 REQ；这里只表示已迁移到配方，不表示软件通过验收。当前仅有限组件路径有部分证据；所有条目均保留完整端到端验收要求。旧UI已被用户否决；Pro新版已原生编译运行，用户视觉认可待确认，不记为完整产品通过。
+93 个唯一 REQ；这里只表示已迁移到配方，不表示软件通过验收。当前仅有限组件路径有部分证据；所有条目均保留完整端到端验收要求。旧UI与Pro暖白/深墨绿重设计方向均已被用户否决；最新要求不得逊于原版，已转交Pro再次设计；编译结果不表示视觉通过。
 
 | REQ | 需求 | 所属配方 | 归档内规格 | 状态 |
 | --- | --- | --- | --- | --- |
@@ -92,7 +92,7 @@
 | REQ-093 | Private URL、代理和 SSRF | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
 | REQ-094 | 多平台和 WSL 边界 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 部分：Android 四架构构建，ARM64/ARMv7 真机验证；Linux musl 三种非本机架构曾经 QEMU 验证。macOS、Windows、NixOS/WSL 原生验收未执行 |
 | REQ-095 | 隐私工具与外部上游 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
-| REQ-100 | 视觉方向 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：旧设计被否决；Pro重设计已原生构建/运行，用户视觉认可待确认 |
+| REQ-100 | 视觉方向 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未通过：旧设计与Pro重设计方向均被用户否决；以原版为最低视觉基线重新设计，待原生视觉及用户验收 |
 | REQ-101 | App 和紧凑 Panel 布局 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
 | REQ-102 | 语言 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
 | REQ-103 | 可访问性与操作反馈 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
