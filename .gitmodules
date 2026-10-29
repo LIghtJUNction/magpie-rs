@@ -34,3 +34,6 @@
 [submodule "generated/magpie-rs-source"]
 	path = generated/magpie-rs-source
 	url = https://github.com/LIghtJUNction/magpie-rs-source.git
+[submodule "recipkg-skill-maintain-recipkg-standard-library"]
+	path = .agents/skills/maintain-recipkg-standard-library
+	url = https://github.com/recipkg/maintain-recipkg-standard-library.git
