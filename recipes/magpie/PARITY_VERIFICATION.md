@@ -33,6 +33,8 @@
 
 以下只约束上述固定原版和 `ORIGINAL_CLI_BEHAVIOR.md` 所述空合成条件，不能推广到真实配置、其他版本或平台。逐字节断言时保留 stdout、stderr、退出码、行尾空格与换行；不要以 trim 后比较冒充字节一致。
 
+REQ-001 对用户 Agent 列表的描述与空环境 `agents` 列出所有支持项的实测存在入口范围上的未决差异：`agents`、`ls` 分别按以下样本对照，其他用户列表仍按 REQ-001 实现并继续验证原版，不能把两条 CLI 结果推断成所有 UI 的规则。详见 `OPEN_QUESTIONS.md`。
+
 1. 空 PATH、合成 `CODEX_HOME` 路径不存在时，`agents` 列出 68 条受支持项且均显示未检测到；`ls` 的 stdout 为空，stderr 是 `magpie: no supported agents found on this machine` 加换行，退出 1。
 2. 同条件下分别放入合成可执行文件 `claude`、`codex`、`gemini`，及三者两两/全部组合；`ls` 按已观察顺序列出相应条目、退出 0。未设置 `CODEX_HOME` 时使用默认 `~/.codex/config.toml` 显示路径。只创建空 `~/.codex` 而无 CLI 时，已观察 `ls` 仍返回一条 `CLI not found` 和退出 0。各组合的完整输出及指纹见对应证据，不能只断言行数。
 3. 空数据下 `sessions --json` 为数组，`sessions --days 1 --json` 为带汇总的对象，`usage --csv` 是 47 列表头；具体字段和值逐条对照证据。已观察普通查看/版本会生成初始化文件，而帮助不生成；重建若为安全或其他明确理由有意不同，记录差异、用户可见影响及决策，不能悄悄称为字节级一比一。
