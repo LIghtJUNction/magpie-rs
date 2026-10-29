@@ -5,7 +5,7 @@ format = "recipkg/1"
 
 [package]
 name = "magpie"
-version = "1.3.6"
+version = "1.3.7"
 kind = "software"
 description = "完整重建 Rust Magpie：GPUI、CLI、多平台与低内存约束。"
 entry = "BUILD_PROMPT.md"

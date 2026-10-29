@@ -5,7 +5,7 @@ format = "recipkg/1"
 
 [package]
 name = "magpie-core"
-version = "1.0.0"
+version = "1.0.1"
 kind = "software"
 description = "重建 Magpie Agent、Provider、路由、Library 与安全状态核心。"
 entry = "BUILD_PROMPT.md"

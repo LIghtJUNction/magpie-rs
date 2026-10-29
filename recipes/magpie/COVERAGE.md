@@ -42,7 +42,7 @@
 | REQ-038 | 远程 magpie | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
 | REQ-039 | Gateway 的附加查询接口 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 未执行 |
 | REQ-040 | 建立模型路由组 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/04-routing-and-failover.md` | 部分：内存中有界组/嵌套校验已测；持久化管理及网关未接入 |
-| REQ-041 | 路由策略 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/04-routing-and-failover.md` | 部分：七种策略的合成快照纯计算36项测试通过；实际网关选择未接入 |
+| REQ-041 | 路由策略 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/04-routing-and-failover.md` | 部分：七种旧策略的合成快照纯计算36项测试通过；原版隔离 Web 另显示 Free first、Manual，两项实际网关语义尚未验收；实际网关选择尚未接入 |
 | REQ-042 | 选择可服务成员和 account 顺序 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/04-routing-and-failover.md` | 部分：未知额度、权限与限制等候选过滤已测；真实账户快照及网关未接入 |
 | REQ-043 | 按请求上下文匹配路由规则 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/04-routing-and-failover.md` | 未执行 |
 | REQ-044 | Session affinity 和重置 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/04-routing-and-failover.md` | 未执行 |

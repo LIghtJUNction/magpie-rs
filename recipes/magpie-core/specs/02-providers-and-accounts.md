@@ -7,6 +7,7 @@
 - 提供预设厂商与中继服务。当前基线的主要预设：Anthropic、OpenAI、Google Gemini、Google Vertex AI、DeepSeek、xAI、Kimi（中国与全球）、Kimi Code、中国智谱 GLM、Z.ai、MiniMax、StepFun、Xiaomi MiMo、Baidu Qianfan、Tencent Cloud、Huawei Cloud MaaS、Volcengine Ark、Qwen、中国 Qwen Token Plan、Bailian Token Plan、Mistral、Groq、Amazon Bedrock、Bedrock Mantle、Azure OpenAI、Ollama Cloud、Nous Portal、OpenRouter、OpenCode Go、ClinePass、OpenCode Zen、Kilo Gateway、Command Code、Together AI、Fireworks、SiliconFlow、NVIDIA NIM、ModelScope、AiHubMix、PipeLLM、302.AI、CherryIN、鱼鱼连线、TypeSafe Jev、Vercel AI Gateway Jev、Cloudflare Workers AI Jev/Clef、Bailian Decision Model、Qwen Decision Model、Ollama、LM Studio、oMLX、MLX-Serve、Remote magpie。带地区/套餐的项目须提供相应 Region 选择。
 - 允许用户增加自定义 Provider：名称、OpenAI-compatible Chat base、Anthropic-compatible base、可选 Responses base、Catalog 来源、可选模型 ID、地区、请求 Header、自定义价格、User-Agent 策略和密钥。
 - Add 页的预设应按 vendor、relay/local 等类型分组，可搜索；没有密钥的本地 Provider 不强制要求密钥。未知或已退休预设不能错误显示为仍由内置代码直接服务的账号。
+- 固定原版隔离 Web 还显示订阅、厂商、转接、本机及远程 Magpie 分组。搜索无匹配时可直接进入自定义 Provider 或查找插件。自定义表单让用户直接输入密钥，提供 OpenAI compatible、Responses、Anthropic、Gemini 和仅供路由决策的 System One 入口；可选择/手动输入模型。密钥界面输入与安全存储必须实际实现，不能仅用进程环境变量引用代替。原版表单的存储提示及隔离观察见根配方 `ORIGINAL_WEB_BEHAVIOR.md`；这里不要求重建沿用其明文存储方式。
 - 正常验收：加 DeepSeek 只需输入 key；加本地 Ollama 可不填 key；加自定义兼容服务需同时设地址和模型。
 - 失败验收：网址 scheme、密钥字段或必需的 base URL 不合法时拒绝保存并指出字段；不向任意地址发送真实 key 进行校验。
 
@@ -15,6 +16,7 @@
 - 优先级：核心。
 - 一个 Provider 可有多个上游密钥/账号；用户可以增删、排序、改名、轮换或暂停。密钥显示遮蔽值，复制/重新显示需显式操作。删除后 Usage 历史仍能识别原密钥身份，但不得显示凭据。
 - 支持请求 Header、模型过滤/自动包含模式、手动模型 ID、用户价格、刷新周期、fallback 模型，以及请求 User-Agent 策略。修改某项不应静默清除其它设置。
+- 自定义 Provider 的高级选项包括额外 Header 和请求 body、全局/直连/自定义代理、并发、每 key/账户请求速率、队列长度与等待时间、价格倍率、Agent User-Agent、限流休眠、余额认证、上下文及输出/压缩限制。可分别配置 Anthropic、Responses、Gemini、模型列表、目录和余额端点；模型选择包括供应商列表、仅选中项、仅 Usage 与仅经路由组。界面声明的默认值、替换语义和端点行为要通过隔离上游单独验证，不能因为看到控件就声称实现完成。
 - 一次 Provider 测试用一个低成本请求检查配置，报告成功、上游状态、错误和耗时；刷新模型列表单独操作。
 - 正常验收：轮换第一把 key 后新请求使用新 key，历史仍归属于原 key。
 - 失败验收：上游拒绝 key 时保留配置并标识失败，不能把 Provider 删除或把空列表当成功。
