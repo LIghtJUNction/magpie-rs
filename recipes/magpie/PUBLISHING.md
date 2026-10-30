@@ -1,5 +1,16 @@
 # 本地状态与发布检查
 
+## 2026-10-30 更新日志迭代与直接合并
+
+用户本轮已明确授权直接合并。上一轮源码 PR #2 已合入 main，merge commit `338c9328428d95c5cc776c04b713c09c7b9c5d28`；父仓 PR #1 已合入 main，merge commit `487eda5ef4afce9b96d1305e8d9252bdd05ee828`。以下旧“审阅分支”章节是此前状态。
+
+本轮先发布并合并源码，再将父仓 gitlink 固定为 `9ff54775bd3aa0c7b9436e06f0c281fa5a7f6166`，配方升级 1.4.0。新源码内容树与本地验证输入核对一致；源码 GitHub PR 为 `https://github.com/LIghtJUNction/magpie-rs-source/pull/3`。父仓本提交保存完整配方、审计、验证记录和 gitlink，按同一直接合并授权发布，不改写历史或无关技能 pin。
+
+发布前重新回读主仓 topics 为 `recipkg`，保持原值。准确配方的验证记录在主仓 `verification/recipe-1.4.0.md`；完整递归归档只含 Markdown 与 LOCK，不带源码、截图、二进制或文件系统链接。归档完整性与软件完成程度分开：当前 99 条需求中仍有 50 条未实现，另 49 条仅部分或组件级。
+
+本轮没有生成新的多平台安装包、发布 Release/AUR 或替换用户安装。桌面截图是原生 GPUI 合成数据离屏场景，实际窗口与用户视觉验收继续独立记录。后文既有渠道授权和历史证据保留，不冒充本轮已执行。
+
+
 ## 2026-10-30 审阅分支
 
 共享Provider与原版UI对齐源码已发布至 `improve/provider-ui-parity`，commit `452d59e0e1c3d96cd7110ebd6506c38448fa3198`，对应 [源码 PR #2](https://github.com/LIghtJUNction/magpie-rs-source/pull/2)。父仓库本轮固定同一gitlink并更新配方1.3.8、覆盖表及证据；main与此前发布历史没有改写。GitHub主仓的 `recipkg` topic已重新回读确认保留。

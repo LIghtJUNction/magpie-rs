@@ -96,7 +96,8 @@
 ## REQ-049：Agent 工具服务
 
 - 优先级：一般。
-- 通过 MCP 暴露 `web_search` 和按 URL 读取页面的 `web_fetch`。根据用户所选模型和服务配置提供图片理解、图片生成和（在支持订阅条件下）视频生成/查询/内容读取。可在 CLI `magpie tools` 查看并以 `magpie tool` 调用。
+- 通过 MCP 暴露 `web_search` 和按 URL 读取页面的 `web_fetch`。根据用户所选模型、Provider/API 或订阅账户的实际能力提供图片理解、图片生成和视频生成/查询/内容读取；视频不能无依据地限定为仅订阅能力。可在 CLI `magpie tools` 查看并以 `magpie tool` 调用。
+- 媒体任务保留创建时的上游 key/account 归属；查询与内容读取重新检查当前调用者的模型/账户权限。MCP job/file 的创建 Gateway KeyID 与直接 HTTP 视频任务的授权规则分别执行，不能混为同一种所有权。Gateway 包的 UPSTREAM_ROUTES.md 提供精确路径、返回形态及尚待采集的 schema；不从已有处理器推导未注册的列表、删除或 remix 操作。
 - 工具参数要验证 URL、输入文本、尺寸、输出目录和文件名；媒体返回可保存到用户指定文件/目录。工具能力清单应由模型/Provider 实际支持情况生成。
 - 正常验收：Agent 通过 MCP 搜索网页并收到标题/URL/摘要，`magpie tool generate_image ... -o file.png` 在成功后写出文件。
 - 失败验收：MCP 未连接、模型不支持视觉或媒体 Provider 返回错误时，给可读错误并清理未完成临时文件。

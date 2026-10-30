@@ -1,5 +1,22 @@
 # 验证证据
 
+## 更新日志、完整审计与功能迭代（2026-10-30）
+
+本轮按用户“直接合并”指令，先合并上一轮源码 [PR #2](https://github.com/LIghtJUNction/magpie-rs-source/pull/2) 与主仓 [PR #1](https://github.com/LIghtJUNction/magpie-rs/pull/1)，起点分别为 `338c9328428d95c5cc776c04b713c09c7b9c5d28` 与 `487eda5ef4afce9b96d1305e8d9252bdd05ee828`。本轮新源码合并提交为 `9ff54775bd3aa0c7b9436e06f0c281fa5a7f6166`，父仓保存该准确 gitlink；发布树与验证输入逐一核对。本节是当前快照，下方历史记录不替代本轮边界。
+
+- 原版固定 **0.1.2185 / f1151226262022743bd103a78af41e1004cc6055**。完整阅读官方 237 条发布，包含 1948 基线 1 条、1949–2148 的 199 条及旧源码之后 2149–2185 的 37 条；官方没有 2070。版本摘要歧义回到固定源码核实，逐发布映射在 UPSTREAM_CHANGELOG.md。
+- 配方升级 **1.4.0**，core/gateway 均为 **1.1.0**。旧 93 条编号全部保留，新增 MCP Hub、Responses 续接、TTS、只读 Gateway key、Agent 历史读取许可、Responses WebSocket，共 99 条。补录 17 族、69 条公开路由注册，纠正旧版对 Ollama 原生生成、音频、视频来源和两种正文存储的遗漏。登记是目标合同，不是已实现计数。
+- 99 条逐一阅读实现与证据，当前为 **39 部分、10 仅组件、50 未实现**；新增六项全未实现。完整入口/边界/下一步见 COVERAGE 和源码两份 46/47 条基线审计；本轮实现增量单独记录，没有将全平台或真实外部验收改成已通过。
+- 桌面新增真实 Gateway 页面和自有子进程生命周期：默认启动、启停、实际版本/实例/目录检查、复制地址、本机监听偏好；外部服务只读。私有 stdin lease 在正常退出或持有者异常退出时释放服务；公开 identity 不作为所有权凭证。关闭等待期间不再允许启动，Provider 变化后重新进入会刷新目录。CLI/headless 不初始化 GPUI。
+- 已接入 Codex 可以直接换模并保留首次恢复点。CLI/桌面走同一更新事务；SHA-256 revision 绑定完整配置与文件身份，过期预览拒绝，模型不变无写入，用户自有 magpie Provider 不接管。连续换模后离线断开恢复最初字节；更新日志 v2 与恢复映像覆盖明确中断窗口，旧程序遇 v2 拒绝误恢复。
+- Chat 参数兼容按 2155 的精确域名与 HTTP 400 诊断规则改名一次，共用 deadline/并发槽，保留其他请求字节；其他错误和已开始 SSE 不重放。未实现原版跨请求参数偏好缓存或通用路由 fallback。目录模式与转发模式现在共用真实 loopback/Host/Origin/代理头边界。
+- Linux x86_64、Rust 1.99.1、锁定依赖：workspace **327 passed / 0 failed**；4 个默认忽略入口是父测试会启动的 worker。全 targets Clippy `-D warnings` 与 fmt 通过。实际监督 CLI 的 ready/health/inspect、端口冲突、损坏 store、EOF/重启，以及单独 owner 进程被结束后服务自行退出和端口可复用均通过。最终 CLI 在独立路径构建，避免共享缓存被另一构建替换，SHA-256 `18c294f42a6d6067f6f1f3a1bb788380a5efb5e759590c120cc69f3eb15cc83c`。
+- 桌面最终 78 passed / 0 failed；两条实际 CLI opt-in 另行通过，验证自有服务/外部只读及连接→换模→停止→离线恢复。剩余一个安装版 Codex worker 本轮未重跑。独立 workspace 的 visual-test 全 targets 严格 Clippy 和 fmt 通过。实际原生 Scene 生成中文 80 场景、1×/2× 共 160 PNG，覆盖 1280/900/440/360 宽度与浅深主题；逐张尺寸吻合。实际目视复核 5 个代表场景（主审 4 个），最终字节与所看图片一致；没有将全部渲染称为全部视觉通过。窄窗换模按钮已修正可达，Gateway 下方表单仍需滚动；原生窗口交互与用户视觉认可未验收。
+- 配方准确版本的 pack、归档 check、unpack、解包目录 check、中文 build，以及 UTF-8/LOCK/需求编号/依赖 pin 核对见主仓 [verification/recipe-1.4.0.md](https://github.com/LIghtJUNction/magpie-rs/blob/main/verification/recipe-1.4.0.md)。源目录离线 check 对未解析 Git 依赖的退出 2 单独说明，不伪报为直接通过。临时归档与生成提示词按发布合同删除。
+
+实现说明与机器证据位于源码 `docs/changelog-parity-2026-10-30.md` 和 `tests/results/changelog-parity-2026-10-30.json`，包括输入散列、各检查结果和原生渲染记录。所有新流程使用合成配置和本机上游；真实外部 Provider/Agent、macOS/Windows/Android、完整 OS 窗口/IME/读屏、用户视觉认可、Release/AUR 与系统安装均未在本轮通过。Windows 配置写入和 Android 原生 GPUI 后端的既有缺口仍保留。
+
+
 ## 共享 Provider 与原版 UI 对齐（2026-10-30）
 
 本轮源码 `452d59e0e1c3d96cd7110ebd6506c38448fa3198` 已发布到独立仓库 `improve/provider-ui-parity` 分支，并建立 [源码 PR #2](https://github.com/LIghtJUNction/magpie-rs-source/pull/2)。远端内容树与本地测试树逐字节相同；父仓库保存准确 gitlink，具体见 `GENERATED_LAYOUT.md`。完整实现说明和机器证据分别位于源码 `docs/provider-ui-parity-2026-10-30.md` 与 `tests/results/provider-ui-parity-2026-10-30.json`。下方此前所有“当前”表述均为对应日期的历史快照，不能替代本轮的实现与验证边界。
