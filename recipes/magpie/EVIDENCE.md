@@ -1,6 +1,19 @@
 # 验证证据
 
-## 当前业务与桌面操作快照（2026-10-29）
+## 共享 Provider 与原版 UI 对齐（2026-10-30）
+
+本轮源码 `452d59e0e1c3d96cd7110ebd6506c38448fa3198` 已发布到独立仓库 `improve/provider-ui-parity` 分支，并建立 [源码 PR #2](https://github.com/LIghtJUNction/magpie-rs-source/pull/2)。远端内容树与本地测试树逐字节相同；父仓库保存准确 gitlink，具体见 `GENERATED_LAYOUT.md`。完整实现说明和机器证据分别位于源码 `docs/provider-ui-parity-2026-10-30.md` 与 `tests/results/provider-ui-parity-2026-10-30.json`。下方此前所有“当前”表述均为对应日期的历史快照，不能替代本轮的实现与验证边界。
+
+- 固定读取原版 yetone/magpie `dca3e2d716fe21bbb3e239f769a8e7861b135c01` 的页面结构与CSS，结合既有原版隔离操作记录及公开浅/深参考。GPUI保持Rust原生实现，继续采用原版连续列表、白灰/炭黑与紫色选中态、宽窗侧栏与中窄顶部导航。
+- ProviderStore接入CLI、GPUI及Gateway：自定义Provider新增/编辑/启停/删除、直接密钥输入、系统凭据引用、真实模型刷新和按Provider/model路由。Linux真实Secret Service的合成key跨CLI/Gateway进程读取、轮换即时生效、停用阻止新请求及删除后清理已测；未使用真实账户。
+- 4协议模型发现复用同一传输与认证规则，支持Anthropic/Gemini分页，失败/不完整/超限/并发更新不覆盖旧目录。每Provider最多4096模型、全store最多16384、store1MiB；合法最大目录与JSON转义膨胀测试通过，完整HTTP目录上限32MiB，不截断有效模型。
+- 本轮Linux x86_64（Ubuntu24.04.3、Rust1.99.1）根workspace全targets 298 passed、4个辅助进程入口按测试设计忽略；全targets Clippy -D warnings与fmt通过。真实Secret Service独立脚本7项检查通过，包括Codex合成配置的dry-run/apply/原字节恢复。已安装Codex客户端、其他系统和真实外部Provider没有在本轮重新执行。
+- 独立GPUI workspace使用固定revision `37faef81f74fc1bb08be9939c4cffc8ede6ced2f`；桌面输入/偏好/操作组件68项通过、1个既有可选native-client worker本轮未执行，全目标严格Clippy与fmt通过。实际GPUI Scene覆盖1280×720、900×560、440×560、360×560，浅深色以及Agents、Codex、Providers、编辑表单、凭据区和Settings。中文48场景及德语360px补充12场景的manifest与指纹见源码机器证据。截图使用合成数据，只证明对应离屏像素，不表示原生窗口键盘/IME/读屏或用户视觉认可。
+- 保留93个唯一REQ，更新23项有新增证据的状态，未将部分实现标为全部通过。预设/OAuth/多账户、完整Usage/路由/插件/Library/同步、其他Agent写入和桌面Gateway生命周期仍在待办；Windows配置写入仍明确拒绝，新增依赖后的其他平台需复验。
+- Linux打包依赖补齐D-Bus，13项现有打包自检、shell语法及本地ELF/Debian依赖解析通过；没有将这些检查等同于真实安装包验收。
+- 本轮交付源码与配方审阅分支；未生成或发布多平台Release/AUR，也未替换用户安装。旧性能、Android真机和原版CLI对照结果继续保留为其对应版本的历史证据。
+
+## 2026-10-29 业务与桌面操作快照（历史）
 
 当前源码 pin 为 `f20439bcc03d527f8c713b1b22c066604e16ba7a`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 
