@@ -1,5 +1,11 @@
 # 本地状态与发布检查
 
+## 2026-10-30 审阅分支
+
+共享Provider与原版UI对齐源码已发布至 `improve/provider-ui-parity`，commit `452d59e0e1c3d96cd7110ebd6506c38448fa3198`，对应 [源码 PR #2](https://github.com/LIghtJUNction/magpie-rs-source/pull/2)。父仓库本轮固定同一gitlink并更新配方1.3.8、覆盖表及证据；main与此前发布历史没有改写。GitHub主仓的 `recipkg` topic已重新回读确认保留。
+
+源码内容树 `b414809af6585abdeba9c1e925d5e57f8f74869d` 与本地已测试树一致。源码、父配方分别建立审阅PR；多平台Release、AUR及用户安装均未在本轮执行。当前打包声明补齐Linux D-Bus依赖，其他平台/完整安装流程仍需对应验证。后文各pin和发布说明保留为历史记录。
+
 独立源码仓为 <https://github.com/LIghtJUNction/magpie-rs-source>。用户已授权本轮迭代后发布源码、主仓配方、多平台 Release，以及 `magpie-rs-bin` / `magpie-rs-git` AUR 包，并安装其中一个互斥变体。独立源码仓 `main` 已推送并回读 `4a967ec2eecb165630a7b246546bd3bd6362fc05`；主仓本次提交保存配方与该源码指针。用户已否决当前 UI 并要求 Pro 重做，AUR、Release 与替换安装均尚未执行，需分别记录后续证据。
 
 发布准备时通过 `gh api repos/LIghtJUNction/magpie-rs --jq '{name,topics}'` 查询到主仓库 topics 为空。根据最新版迁移指南，GitHub 上发布 Recipkg 配方的仓库必须带 `recipkg` topic，并保留已有其他 topics。主仓发布前执行并回读：
