@@ -1,6 +1,6 @@
 # 需求覆盖索引
 
-93 个唯一 REQ；这里只表示已迁移到配方，不表示软件通过验收。当前仅有限组件路径有部分证据；所有条目均保留完整端到端验收要求。旧UI与Pro暖白/深墨绿重设计方向均已被用户否决；最新要求不得逊于原版，已转交Pro再次设计；编译结果不表示视觉通过。
+本分支旧基线包含 93 个唯一 REQ；这里只表示已迁移到配方，不表示软件通过验收。2026-11-02 已接入 gpui-kit-material 并补充窗口内网关启停，首轮真实窗口被用户否决；后续修改仍待原生交互与视觉验收。全部本地基线需求保留；远端 main 的 1.4 配方仍待合并，具体 checkpoint 与边界见 EVIDENCE.md、MATERIAL_UI.md。
 
 配方 1.3.5 新增 [逐任务对照与证据规则](PARITY_VERIFICATION.md)，按此表的编号核对覆盖索引，93 项均有任务映射；这是配方追踪覆盖，不表示实现覆盖或原版行为已经全部采集。原版用户任务的未知项、独立重建、完整平台及真实账户仍须逐项实测。
 
@@ -31,7 +31,7 @@
 | REQ-027 | 账户顺序和约束 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
 | REQ-028 | 计划与本机订阅使用限制 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
 | REQ-029 | 账号和模型状态对外说明 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/02-providers-and-accounts.md` | 未执行 |
-| REQ-030 | 本地 Gateway 生命周期 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：Linux真实TCP启动、健康/端口冲突/限额/启动超时fixture已测；Android双ARM真机HTTP/SSE通过，桌面生命周期及各系统安装恢复未验收 |
+| REQ-030 | 本地 Gateway 生命周期 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：Linux真实TCP启动、健康/端口冲突/限额/启动超时fixture已测；Android双ARM真机HTTP/SSE通过，新增桌面自有子进程的启动/停止/端口冲突/Drop 清理通过真实 CLI 测试；完整窗口交互与各系统安装恢复未验收 |
 | REQ-031 | 请求入口与模型标识 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：loopback 合成上游的四协议入口/模型转换以及 Codex 原生链路已测；外部TLS/真实上游和全部字段未验收 |
 | REQ-032 | 协议转换和流式行为 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：四协议12种定向纯转换、部分实际 HTTP/SSE 转换及取消/错误已测；原生 SSE 首错误响应头竞态经确定性模拟和1000次回归修复，Provider合并版待复验；官方全部字段、流事件和上游兼容未验收 |
 | REQ-033 | 错误、状态码和请求归属 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/03-gateway-and-protocols.md` | 部分：固定脱敏错误、上游错误/不完整流与并发拒绝已测；完整请求归属/Usage和外部上游兼容未实现 |
@@ -82,7 +82,7 @@
 | REQ-078 | 远端内容和恢复保护 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/07-library-sync-and-backup.md` | 未执行 |
 | REQ-079 | Usage 数据与请求档案 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/07-library-sync-and-backup.md` | 未执行 |
 | REQ-080 | 运行形态 | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 部分：无显示/GPU的CLI和桌面ActionsState测试通过、GPUI release已构建；窗口/托盘/后台完整生命周期、Web/TUI未验收 |
-| REQ-081 | 桌面导航和设置 | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 未执行 |
+| REQ-081 | 桌面导航和设置 | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 部分：Material 按钮/导航/主题已接入，四页可运行；首轮真实窗口被否决，完整导航/设置持久化未实现 |
 | REQ-082 | 浏览器 Web UI | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 未执行 |
 | REQ-083 | TUI | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 未执行 |
 | REQ-084 | CLI 接口 | magpie-interfaces | `.deps/interfaces/specs/08-cli-tui-and-web.md` | 部分：agents/ls 空状态及合成 Claude/Codex/Gemini 单、两两、三候选与默认路径的已观察空配置输出按原版字节对照，旧JSON保留；其他目录组合、真实配置及其余命令未完整实现 |
@@ -94,7 +94,7 @@
 | REQ-093 | Private URL、代理和 SSRF | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
 | REQ-094 | 多平台和 WSL 边界 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 部分：当前HTTP/SSE业务的Android四ABI API23构建、ARM64/ARMv7真机转发通过；设备事务因0771祖先目录拒绝，旧musl/QEMU证据不替代当前构建，macOS/Windows/NixOS/WSL未验收 |
 | REQ-095 | 隐私工具与外部上游 | magpie-core | `.deps/interfaces/.deps/gateway/.deps/core/specs/09-privacy-security-and-platforms.md` | 未执行 |
-| REQ-100 | 视觉方向 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未通过：旧设计与Pro重设计方向均被用户否决；visual r2也被否决；由Pro继续改样式，待真实GPUI渲染对照及用户验收 |
+| REQ-100 | 视觉方向 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未通过：历史设计及 2026-11-02 Material 首轮真实窗口均被用户否决；最新修正仅作进度提交，待继续重做与用户验收 |
 | REQ-101 | App 和紧凑 Panel 布局 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 未执行 |
 | REQ-102 | 语言 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：五语文本与CJK/grapheme输入组件已测；原生IME、语言切换焦点/持久化及locale日期数字未完整验收 |
 | REQ-103 | 可访问性与操作反馈 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：焦点/取消/预览失效和真实输入组件测试通过；原生键盘、IME/读屏及新视觉仍待验收 |

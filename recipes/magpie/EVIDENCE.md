@@ -1,5 +1,17 @@
 # 验证证据
 
+## 2026-11-02 开发进度保存（未验收、未发布软件包）
+
+- 源码：`500c44120ca83a84dded8625ecfae8dd97be489d`，分支 `wip/material-desktop-20261102`。父仓库使用同名进度分支。本地基线早于远端 main；远端源码 main `9ff54775bd3aa0c7b9436e06f0c281fa5a7f6166` 与配方 main `bc9aba2098deddbc5ded8930db458aa0767837c8` 已有另一批 Provider、钥匙串、监督网关、Codex 模型更新及 1.4 配方。**两边尚未合并，本节仅描述本分支。**
+- 本分支保留已有 Provider/四协议适配工作，接入 `gpui-kit-material@47895b92558883d24e19d54fdeb876ed551d9394` 的真实按钮、导航和主题；新增桌面自有网关进程的启动、停止与退出清理。
+- CLI/core/service 同一份业务源码本地测试 293 通过、5 个辅助用例忽略；合成 Provider 合并回归 18 通过。桌面最终测试 77 通过、2 个辅助用例忽略；单独执行真实 CLI 生命周期用例 1 通过；最终 all-targets（含 visual-test 示例）编译与 Clippy `-D warnings` 通过。最终源码证据为 `tests/results/material-desktop-2026-11-02.json`。
+- Linux Wayland 中实际打开首版 Material 窗口，用户明确评价“太丑了”“功能比原版少了不少”。后续主题/布局调整只有编译与自动测试证据，未重新完成原生交互或视觉验收。REQ-100 保持未通过，不能把截图或编译等同于功能齐平。
+- 用户要求尽快提交推送、结束，下次继续。未编译、未接入的 Usage 原型单独保存在源码 `wip/usage-recording-20261102`（`06bdaca7bce67b768e8d0b3ff9c6f7de883a1613`）；主进度分支不包含该草稿。后续先合并远端已有能力，再补齐功能和重做 UI。完整交接见源码 `docs/NEXT_SESSION.md`。
+- GitHub 安全页：5 条历史 secret scanning 告警经来源核实后关闭（1 条测试夹具、4 条公开原生应用 OAuth 常量），复核开放告警为 0；根仓库及源码仓库开放 Dependabot 告警为 0。Code scanning 无分析记录，不代表扫描通过。未改写 Git 历史。
+- 未发布新软件包、未触发发布流程；未完成其他 OS、真实账号、全流程窗口操作与原版全部功能验收。配方 1.3.8 仅为旧本地基线的进度快照，不能替代远端 1.4。
+- 本机本轮日志和合成夹具位于 `/home/lightjunction/.cache/magpie-rs-build/smoke-20261102/`。
+
+
 ## 当前业务与桌面操作快照（2026-10-29）
 
 当前源码 pin 为 `f20439bcc03d527f8c713b1b22c066604e16ba7a`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
