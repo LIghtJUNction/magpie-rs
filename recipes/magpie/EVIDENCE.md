@@ -1,18 +1,49 @@
 # 验证证据
 
-## 2026-11-02 开发进度保存（未验收、未发布软件包）
+## Material 与共享状态整合（2026-11-02）
 
-- 源码：`500c44120ca83a84dded8625ecfae8dd97be489d`，分支 `wip/material-desktop-20261102`。父仓库使用同名进度分支。本地基线早于远端 main；远端源码 main `9ff54775bd3aa0c7b9436e06f0c281fa5a7f6166` 与配方 main `bc9aba2098deddbc5ded8930db458aa0767837c8` 已有另一批 Provider、钥匙串、监督网关、Codex 模型更新及 1.4 配方。**两边尚未合并，本节仅描述本分支。**
-- 本分支保留已有 Provider/四协议适配工作，接入 `gpui-kit-material@47895b92558883d24e19d54fdeb876ed551d9394` 的真实按钮、导航和主题；新增桌面自有网关进程的启动、停止与退出清理。
-- CLI/core/service 同一份业务源码本地测试 293 通过、5 个辅助用例忽略；合成 Provider 合并回归 18 通过。桌面最终测试 77 通过、2 个辅助用例忽略；单独执行真实 CLI 生命周期用例 1 通过；最终 all-targets（含 visual-test 示例）编译与 Clippy `-D warnings` 通过。最终源码证据为 `tests/results/material-desktop-2026-11-02.json`。
-- Linux Wayland 中实际打开首版 Material 窗口，用户明确评价“太丑了”“功能比原版少了不少”。后续主题/布局调整只有编译与自动测试证据，未重新完成原生交互或视觉验收。REQ-100 保持未通过，不能把截图或编译等同于功能齐平。
-- 用户要求尽快提交推送、结束，下次继续。未编译、未接入的 Usage 原型单独保存在源码 `wip/usage-recording-20261102`（`06bdaca7bce67b768e8d0b3ff9c6f7de883a1613`）；主进度分支不包含该草稿。后续先合并远端已有能力，再补齐功能和重做 UI。完整交接见源码 `docs/NEXT_SESSION.md`。
-- GitHub 安全页：5 条历史 secret scanning 告警经来源核实后关闭（1 条测试夹具、4 条公开原生应用 OAuth 常量），复核开放告警为 0；根仓库及源码仓库开放 Dependabot 告警为 0。Code scanning 无分析记录，不代表扫描通过。未改写 Git 历史。
-- 未发布新软件包、未触发发布流程；未完成其他 OS、真实账号、全流程窗口操作与原版全部功能验收。配方 1.3.8 仅为旧本地基线的进度快照，不能替代远端 1.4。
-- 本机本轮日志和合成夹具位于 `/home/lightjunction/.cache/magpie-rs-build/smoke-20261102/`。
+源码已发布 `0b9f02aed6f4c56ff95333fe4637b6e6ffb16192`，保留远端 main 全部共享 Provider/凭据/监督网关和 Codex 换模能力，并接入固定 gpui-kit-material `47895b9` 的真实按钮、NavigationRail 和主题。旧首版已被用户否决，本轮不能继承视觉通过。
+
+- workspace 327 passed / 4 ignored，桌面 visual-test 79 passed / 3 ignored；fmt、两套严格 Clippy、workspace 无依赖文档构建通过。桌面 help/version 在无 DISPLAY/WAYLAND_DISPLAY 下通过，监督 owner 异常退出脚本通过。
+- 80 场景真实 GPUI 渲染（中文、四尺寸、浅深）已导出，实际检查代表场景，未宣称逐张或用户认可。修正预览时钟，避免导航入场动画透明初帧。原生 Wayland 另检查德语深色与 360px Provider 页面。
+- 原生隔离窗口实际新建/刷新 Provider，CLI/Gateway 立即读到同一目录；真实合成 Responses 请求返回 fixture-ok。Codex 预览不写，保存 model-a、直接换 model-b，断开恢复含注释/未知字段的原始字节。取消/窗口关闭的未保存草稿确认已实际检查。
+- 原生主题/语言保存后关闭重开为德语深色；自有 Gateway 停止释放端口，可重新启动，正常退出回收。AT-SPI 仅有应用根，完整 IME/键盘、读屏、用户视觉认可和其他平台仍未验收。
+- 可复现入口为源码 `scripts/desktop-fixture.py`；机器记录见 `tests/results/material-native-2026-11-02.json`。最终桌面 SHA-256 `25761b96bbdf582d8247cc9b334f5dfcb3744a6259b27b8c42ad126545a0e1be`，测试文件/日志/PNG 在 `/home/lightjunction/.cache/magpie-rs-build/smoke-20261102/`。原生请求只到 loopback 合成 API；不使用真实账户。
+- ISSUE_FEEDBACK.md 保存三条有界上游报告的原始状态与回归要求；配方为 1.4.1，99 REQ 与 68 Agent 最低目录完整保留。Usage 等未接入草稿不算实现；无软件包发布或系统安装，提交跳过 CI。
+
+下方是对应日期的历史证据。
+
+## 更新日志、完整审计与功能迭代（2026-10-30）
+
+本轮按用户“直接合并”指令，先合并上一轮源码 [PR #2](https://github.com/LIghtJUNction/magpie-rs-source/pull/2) 与主仓 [PR #1](https://github.com/LIghtJUNction/magpie-rs/pull/1)，起点分别为 `338c9328428d95c5cc776c04b713c09c7b9c5d28` 与 `487eda5ef4afce9b96d1305e8d9252bdd05ee828`。本轮新源码合并提交为 `9ff54775bd3aa0c7b9436e06f0c281fa5a7f6166`，父仓保存该准确 gitlink；发布树与验证输入逐一核对。本节是当前快照，下方历史记录不替代本轮边界。
+
+- 原版固定 **0.1.2185 / f1151226262022743bd103a78af41e1004cc6055**。完整阅读官方 237 条发布，包含 1948 基线 1 条、1949–2148 的 199 条及旧源码之后 2149–2185 的 37 条；官方没有 2070。版本摘要歧义回到固定源码核实，逐发布映射在 UPSTREAM_CHANGELOG.md。
+- 配方升级 **1.4.0**，core/gateway 均为 **1.1.0**。旧 93 条编号全部保留，新增 MCP Hub、Responses 续接、TTS、只读 Gateway key、Agent 历史读取许可、Responses WebSocket，共 99 条。补录 17 族、69 条公开路由注册，纠正旧版对 Ollama 原生生成、音频、视频来源和两种正文存储的遗漏。登记是目标合同，不是已实现计数。
+- 99 条逐一阅读实现与证据，当前为 **39 部分、10 仅组件、50 未实现**；新增六项全未实现。完整入口/边界/下一步见 COVERAGE 和源码两份 46/47 条基线审计；本轮实现增量单独记录，没有将全平台或真实外部验收改成已通过。
+- 桌面新增真实 Gateway 页面和自有子进程生命周期：默认启动、启停、实际版本/实例/目录检查、复制地址、本机监听偏好；外部服务只读。私有 stdin lease 在正常退出或持有者异常退出时释放服务；公开 identity 不作为所有权凭证。关闭等待期间不再允许启动，Provider 变化后重新进入会刷新目录。CLI/headless 不初始化 GPUI。
+- 已接入 Codex 可以直接换模并保留首次恢复点。CLI/桌面走同一更新事务；SHA-256 revision 绑定完整配置与文件身份，过期预览拒绝，模型不变无写入，用户自有 magpie Provider 不接管。连续换模后离线断开恢复最初字节；更新日志 v2 与恢复映像覆盖明确中断窗口，旧程序遇 v2 拒绝误恢复。
+- Chat 参数兼容按 2155 的精确域名与 HTTP 400 诊断规则改名一次，共用 deadline/并发槽，保留其他请求字节；其他错误和已开始 SSE 不重放。未实现原版跨请求参数偏好缓存或通用路由 fallback。目录模式与转发模式现在共用真实 loopback/Host/Origin/代理头边界。
+- Linux x86_64、Rust 1.99.1、锁定依赖：workspace **327 passed / 0 failed**；4 个默认忽略入口是父测试会启动的 worker。全 targets Clippy `-D warnings` 与 fmt 通过。实际监督 CLI 的 ready/health/inspect、端口冲突、损坏 store、EOF/重启，以及单独 owner 进程被结束后服务自行退出和端口可复用均通过。最终 CLI 在独立路径构建，避免共享缓存被另一构建替换，SHA-256 `18c294f42a6d6067f6f1f3a1bb788380a5efb5e759590c120cc69f3eb15cc83c`。
+- 桌面最终 78 passed / 0 failed；两条实际 CLI opt-in 另行通过，验证自有服务/外部只读及连接→换模→停止→离线恢复。剩余一个安装版 Codex worker 本轮未重跑。独立 workspace 的 visual-test 全 targets 严格 Clippy 和 fmt 通过。实际原生 Scene 生成中文 80 场景、1×/2× 共 160 PNG，覆盖 1280/900/440/360 宽度与浅深主题；逐张尺寸吻合。实际目视复核 5 个代表场景（主审 4 个），最终字节与所看图片一致；没有将全部渲染称为全部视觉通过。窄窗换模按钮已修正可达，Gateway 下方表单仍需滚动；原生窗口交互与用户视觉认可未验收。
+- 配方准确版本的 pack、归档 check、unpack、解包目录 check、中文 build，以及 UTF-8/LOCK/需求编号/依赖 pin 核对见主仓 [verification/recipe-1.4.0.md](https://github.com/LIghtJUNction/magpie-rs/blob/main/verification/recipe-1.4.0.md)。源目录离线 check 对未解析 Git 依赖的退出 2 单独说明，不伪报为直接通过。临时归档与生成提示词按发布合同删除。
+
+实现说明与机器证据位于源码 `docs/changelog-parity-2026-10-30.md` 和 `tests/results/changelog-parity-2026-10-30.json`，包括输入散列、各检查结果和原生渲染记录。所有新流程使用合成配置和本机上游；真实外部 Provider/Agent、macOS/Windows/Android、完整 OS 窗口/IME/读屏、用户视觉认可、Release/AUR 与系统安装均未在本轮通过。Windows 配置写入和 Android 原生 GPUI 后端的既有缺口仍保留。
 
 
-## 当前业务与桌面操作快照（2026-10-29）
+## 共享 Provider 与原版 UI 对齐（2026-10-30）
+
+本轮源码 `452d59e0e1c3d96cd7110ebd6506c38448fa3198` 已发布到独立仓库 `improve/provider-ui-parity` 分支，并建立 [源码 PR #2](https://github.com/LIghtJUNction/magpie-rs-source/pull/2)。远端内容树与本地测试树逐字节相同；父仓库保存准确 gitlink，具体见 `GENERATED_LAYOUT.md`。完整实现说明和机器证据分别位于源码 `docs/provider-ui-parity-2026-10-30.md` 与 `tests/results/provider-ui-parity-2026-10-30.json`。下方此前所有“当前”表述均为对应日期的历史快照，不能替代本轮的实现与验证边界。
+
+- 固定读取原版 yetone/magpie `dca3e2d716fe21bbb3e239f769a8e7861b135c01` 的页面结构与CSS，结合既有原版隔离操作记录及公开浅/深参考。GPUI保持Rust原生实现，继续采用原版连续列表、白灰/炭黑与紫色选中态、宽窗侧栏与中窄顶部导航。
+- ProviderStore接入CLI、GPUI及Gateway：自定义Provider新增/编辑/启停/删除、直接密钥输入、系统凭据引用、真实模型刷新和按Provider/model路由。Linux真实Secret Service的合成key跨CLI/Gateway进程读取、轮换即时生效、停用阻止新请求及删除后清理已测；未使用真实账户。
+- 4协议模型发现复用同一传输与认证规则，支持Anthropic/Gemini分页，失败/不完整/超限/并发更新不覆盖旧目录。每Provider最多4096模型、全store最多16384、store1MiB；合法最大目录与JSON转义膨胀测试通过，完整HTTP目录上限32MiB，不截断有效模型。
+- 本轮Linux x86_64（Ubuntu24.04.3、Rust1.99.1）根workspace全targets 298 passed、4个辅助进程入口按测试设计忽略；全targets Clippy -D warnings与fmt通过。真实Secret Service独立脚本7项检查通过，包括Codex合成配置的dry-run/apply/原字节恢复。已安装Codex客户端、其他系统和真实外部Provider没有在本轮重新执行。
+- 独立GPUI workspace使用固定revision `37faef81f74fc1bb08be9939c4cffc8ede6ced2f`；桌面输入/偏好/操作组件68项通过、1个既有可选native-client worker本轮未执行，全目标严格Clippy与fmt通过。实际GPUI Scene覆盖1280×720、900×560、440×560、360×560，浅深色以及Agents、Codex、Providers、编辑表单、凭据区和Settings。中文48场景及德语360px补充12场景的manifest与指纹见源码机器证据。截图使用合成数据，只证明对应离屏像素，不表示原生窗口键盘/IME/读屏或用户视觉认可。
+- 保留93个唯一REQ，更新23项有新增证据的状态，未将部分实现标为全部通过。预设/OAuth/多账户、完整Usage/路由/插件/Library/同步、其他Agent写入和桌面Gateway生命周期仍在待办；Windows配置写入仍明确拒绝，新增依赖后的其他平台需复验。
+- Linux打包依赖补齐D-Bus，13项现有打包自检、shell语法及本地ELF/Debian依赖解析通过；没有将这些检查等同于真实安装包验收。
+- 本轮交付源码与配方审阅分支；未生成或发布多平台Release/AUR，也未替换用户安装。旧性能、Android真机和原版CLI对照结果继续保留为其对应版本的历史证据。
+
+## 2026-10-29 业务与桌面操作快照（历史）
 
 当前源码 pin 为 `f20439bcc03d527f8c713b1b22c066604e16ba7a`，已推送并回读远端 main；父仓库固定此 gitlink。其他尚未提交的并行工作不包含在该 pin。
 

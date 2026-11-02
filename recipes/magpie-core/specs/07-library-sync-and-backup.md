@@ -78,5 +78,6 @@
 
 - 优先级：一般。Usage/quota 可在共享设置备份之外，以各自密封文件单独同步和选择包含范围。将请求正文归档默认关闭；用户明确开启的正文归档与 usage 统计分离，并有本地/远端、大小上限和删除策略。
 - 录制请求正文的 switch 属于每台电脑的本机设置，不由同步打开；有 S3 bucket 的用户可明确选择 S3 archive，否则仅在用户显式启用时写本机 private directory。
+- Request archive 与 REQ-055 的 Gateway conversation recording 是独立开关和保存路径。官方 0.1.1948 已有无 S3 时本机私有归档、默认 1 GiB 上限和最旧请求淘汰；不能用会话录制的 7 天/256 MiB 规则覆盖它，也不能因为已有 usage 元数据就认定已保存请求正文。
 - 正常验收：同步 usage 后，另一台电脑看到用量趋势，但它的 local gateway recording switch 没有被打开。
-- 失败验收：没有 archive destination 时不写本机 prompt body；达到容量限制后移除最旧请求并继续转发。
+- 失败验收：归档未开启时不写本机 prompt body；明确开启但未配置 S3 时按本机归档策略处理。目的地写入失败有反馈且不泄露正文；达到容量限制后移除最旧请求并继续转发。

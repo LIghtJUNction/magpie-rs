@@ -1,10 +1,14 @@
 # 重建 Magpie
 
-实现跨平台 AI 编程 Agent、Provider、账户、模型目录、网关、路由、Usage、Library 和同步管理软件。交付 CLI 与 GPUI 桌面应用，并完成规格中的托盘、Web、TUI 模式。现有合同包含 93 条 REQ 和 68 类 Agent，是必须保留的基线；针对选定原版发现的额外能力继续补充，不把该数量当作功能上限。不能把当前 Rust 原型的能力当成完成范围。
+实现跨平台 AI 编程 Agent、Provider、账户、模型目录、网关、路由、Usage、Library 和同步管理软件。交付 CLI 与 GPUI 桌面应用，并完成规格中的托盘、Web、TUI 模式。保留原有 93 条 REQ 和 68 类 Agent，本轮新增 REQ-105–110 后共 99 条需求；针对选定原版发现的额外能力继续补充，不把该数量当作功能上限。不能把当前 Rust 原型的能力当成完成范围。
+
+本轮原版固定为 **0.1.2185**、源码 `f1151226262022743bd103a78af41e1004cc6055`。完整官方日志范围、与旧二进制/旧源码两种基线的区别、逐发布映射和证据边界见 [UPSTREAM_CHANGELOG.md](UPSTREAM_CHANGELOG.md)。原先对 0.1.1948 的运行观察保留为历史证据，不能冒充 0.1.2185 已实际运行或本项目已实现。
 
 ## 用户已确认的要求
 
-- 2026-11-02：用户指定使用 `https://github.com/mizorewww/gpui-kit-material` 重构前端，并要求增加实际可用功能。当前交付先落实 Material 原生组件、语义主题与导航，以及 Provider 管理、窗口内网关启停、Codex 选模/连接/恢复的连续流程；完整 93 条需求保持有效。具体依赖与验收见 `MATERIAL_UI.md`，其新方向优先于旧 Pro 视觉方案。
+- 2026-11-02 持续目标：完成原生 UI 验收、补齐全部功能、定期提交推送，并持续将实际测试和相关 issue 转成配方要求。先整合远端已有共享 Provider、凭据、偏好和监督网关，所有入口使用同一事实来源。issue 研究边界、状态及回归条件见 [ISSUE_FEEDBACK.md](ISSUE_FEEDBACK.md)。
+
+- 2026-11-02：用户指定使用 `https://github.com/mizorewww/gpui-kit-material` 重构前端，并要求增加实际可用功能。当前交付先落实 Material 原生组件、语义主题与导航，以及 Provider 管理、窗口内网关启停、Codex 选模/连接/恢复的连续流程；完整 99 条需求保持有效。具体依赖与验收见 `MATERIAL_UI.md`，其新方向优先于旧 Pro 视觉方案。
 - 与原版 Magpie 的完整功能一比一还原重建：全部页面、68 个 Agent、Provider/账户/模型、协议网关、路由、Usage/会话、插件、Library/同步/备份、CLI/TUI/Web/托盘及设置逐项对照。Rust/GPUI、低内存和跨平台是实现约束，不构成删减功能的理由。当前只有 Codex 的有限闭环，未实现项保持待完成；按钮、截图、目录和“只读”占位不能代替实际行为。
 - 主实现语言 Rust；GUI 必须使用 GPUI。不得自行改成其他语言或以 WebView 替代桌面框架。平台工具、外部 runtime 和 FFI 可作为必要前提，需说明用途。
 - 本体与内存占用在满足全部功能后尽可能精简；避免 CLI 链接 GPUI、默认常驻无用服务、无界缓存、完整请求/流的重复缓冲。不要以删需求实现精简。
@@ -18,9 +22,9 @@
 
 ## 阅读顺序与递归合同
 
-1. 本文、GLOBAL.md、DEPENDENCIES.md、PERFORMANCE.md、OPTIMIZATION.md、MIGRATION.md、GENERATED_LAYOUT.md、PUBLISHING.md、ORIGINAL_PARITY.md、ORIGINAL_CLI_BEHAVIOR.md、ORIGINAL_WEB_BEHAVIOR.md、PARITY_VERIFICATION.md。
+1. 本文、GLOBAL.md、DEPENDENCIES.md、PERFORMANCE.md、OPTIMIZATION.md、MIGRATION.md、GENERATED_LAYOUT.md、PUBLISHING.md、ORIGINAL_PARITY.md、ORIGINAL_CLI_BEHAVIOR.md、ORIGINAL_WEB_BEHAVIOR.md、PARITY_VERIFICATION.md、UPSTREAM_CHANGELOG.md。
 2. 依赖 `interfaces`：完整阅读其 BUILD_PROMPT.md、ACCEPTANCE.md、specs/08、specs/10、UI_REFERENCE.md。
-3. `interfaces` 的依赖 `gateway`：完整阅读其入口、验收及 specs/03、05、06。
+3. `interfaces` 的依赖 `gateway`：完整阅读其入口、验收、UPSTREAM_ROUTES.md 及 specs/03、05、06、11（新增原版行为）。
 4. `gateway` 的依赖 `core`：完整阅读其入口、验收及 specs/01、02、04、07、09。
 5. 依赖 `quality`：完整阅读 `.deps/quality/BUILD_PROMPT.md` 与 ACCEPTANCE.md，将设计、代码组织、错误/取消处理、性能测量要求应用到所有软件组件；它是质量合同，不是运行时库或另一个服务。项目明确的 Rust/GPUI、任务视觉方向和更具体的性能合同优先。
 6. 依赖 `design`：完整阅读 `.deps/design/BUILD_PROMPT.md`、DIRECTIONS.md、EVALUATION.md、ACCEPTANCE.md 和 SOURCES.md，再阅读其 `.deps/foundation/` 的全部设计合同。按 UI_DIRECTION.md 中的产品取舍应用到 GPUI 主窗/面板、Web 和 TUI；CLI 采用适用的信息层级、文案与反馈部分。它们是设计与验收合同，不是运行时库；原版行为、用户指定 Rust/GPUI 和既有视觉基线优先。
@@ -34,11 +38,11 @@
 
 用户约束优先于旧 GLOBAL.md 的实现自由度。其余行为以对应编号规格为准。文字视觉参考替代图片交付。未知参数和外部协议版本先确认或标为未验证，不猜常量。GLOBAL.md 中的模型例子是固定历史样例，不表示当前供应商承诺。
 
-在此仓库继续开发时，生成实现源码位于 `generated/magpie-rs-source/` 固定提交的 Git 子模块中。先核对子模块 remote、pin、工作区状态和 EVIDENCE.md，再阅读并复用现有 Rust 原型，逐项对照 93 条 REQ；不能把原型状态当作需求已完成。具体工作约定见 GENERATED_LAYOUT.md。`generated/` 根目录只放源码仓库子模块，不放平铺源码；源码、缓存和运行结果都不写入 `recipes/`，配方归档只能包含配方 Markdown 材料。
+在此仓库继续开发时，生成实现源码位于 `generated/magpie-rs-source/` 固定提交的 Git 子模块中。先核对子模块 remote、pin、工作区状态和 EVIDENCE.md，再阅读并复用现有 Rust 原型，逐项对照全部 99 条 REQ；不能把原型状态当作需求已完成。具体工作约定见 GENERATED_LAYOUT.md。`generated/` 根目录只放源码仓库子模块，不放平铺源码；源码、缓存和运行结果都不写入 `recipes/`，配方归档只能包含配方 Markdown 材料。
 
 检验配方能否独立重建时，在独立目录只根据归档内完整配方、递归材料及明确的外部运行前提生成实现；不得读取或复用本项目的生成源码、原版二进制或历史实现。之后可将生成的软件与固定原版在隔离合成输入上对照，原版只作为验收参考，不作为生成实现的运行时依赖。独立重建通过与现有原型通过分别记录。
 
-在该源码子模块内交付可复现构建说明、运行/安装方式、平台能力矩阵、93 条 REQ 状态、自动化/人工验收和资源测量记录。Nix/Arch 包装也要给可重复安装/卸载流程。引用外部工具不意味着已经把它打进配方。迁移与 Recipkg 解析成功不证明生成软件已完成。
+在该源码子模块内交付可复现构建说明、运行/安装方式、平台能力矩阵、全部 99 条 REQ 状态、自动化/人工验收和资源测量记录。每条写明实际入口、实现边界、测试证据和下一条未通过的验收，不能只写“未执行”掩盖尚无实现。Nix/Arch 包装也要给可重复安装/卸载流程。引用外部工具不意味着已经把它打进配方。迁移与 Recipkg 解析成功不证明生成软件已完成。
 
 ## 发行渠道
 

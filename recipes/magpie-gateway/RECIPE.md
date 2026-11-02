@@ -5,7 +5,7 @@ format = "recipkg/1"
 
 [package]
 name = "magpie-gateway"
-version = "1.0.0"
+version = "1.1.0"
 kind = "software"
 description = "重建 Magpie 网关、协议适配、Usage 与插件执行。"
 entry = "BUILD_PROMPT.md"

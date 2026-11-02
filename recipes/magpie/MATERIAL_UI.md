@@ -17,10 +17,10 @@
 
 测试与证据写入 `COVERAGE.md`，原始日志和截图存于源码树外。未实现的 Routing、Usage、Library、插件、同步和其余平台保持待完成，不以占位页面计为实现。
 
-## 2026-11-02 收尾状态
+## 2026-11-02 整合状态
 
-真实 Material 组件和窗口内 Gateway 生命周期已经接入并完成有限本地测试；用户明确否决首版窗口，后续主题与布局修正尚未重新完成原生验收。先按用户要求提交推送、下次继续。多 Agent 连接、路由集成、Usage、Profile、订阅账号、Library、插件等均不是已交付功能。未接入的 Usage 草稿保存在源码独立 WIP 分支，不能据其文件存在提升覆盖状态。
+远端 main 的共享 ProviderStore、系统凭据、偏好和监督网关已与 Material 前端整合；旧原型保存在历史分支，不以旧实现覆盖新增功能。实际接入 Material Button/NavigationRail/主题桥接，并保留未保存草稿的取消/关窗确认。
 
-本轮重新查阅标准库目录，现有 design-directions/design-foundations 仍是适用的递归设计合同，不新增无关配方。
+workspace 327 项与桌面 79 项通过；80 场景真实 GPUI 像素已导出，其中代表场景已目视检查。原生 Wayland 实际跑通新增/刷新 Provider、共享目录、模型 a→b 更新、预览不写与断开后原字节恢复、自有网关启停、关闭回收及主题语言保存；重启显示已保存的德语深色。原生输入法完整行为、读屏和用户对本轮视觉的认可仍未通过。
 
-本轮推送保存到源码与配方的 `wip/material-desktop-20261102` 分支。远端 main 已有后续 Provider/网关能力与 1.4 配方；下次先整合远端进度，不能用当前旧基线覆盖远端实现与需求。
+Routing、Usage、Profile、订阅账号、Library、插件和多 Agent 接入等完整目标均保留，未接入的 Usage 草稿独立保存。三条近期原版 issue 的状态和后续合成验收见 ISSUE_FEEDBACK.md；完整需求仍为 99 项。
