@@ -105,7 +105,7 @@
 | REQ-100 | 视觉方向 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：四页继续对齐原版紧凑列表、白灰/炭黑/紫色与五语布局，新增Gateway和换模场景；Material真实按钮/导航和共享语义主题、80场景渲染及Linux代表窗口已检查；完整页面、自定义字体及用户视觉认可未完成 |
 | REQ-101 | App 和紧凑 Panel 布局 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：主窗1280/900/440/360布局及Gateway owned/external/error、Codex换模场景已实现；真实快捷Panel/托盘、额度账户内容及全部缩放/焦点验收未完成 |
 | REQ-102 | 语言 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：五语文本、CJK/grapheme输入及主题语言持久化/冲突已测，原生窗口保存德语深色并重启恢复；原生IME、完整日期数字本地化未验收 |
-| REQ-103 | 可访问性与操作反馈 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：新增关闭期间禁止重启lease、运行地址不被偏好重载冒充、外部服务禁停、错误保留和换模revision；新增未保存草稿取消/关窗确认并保留内容、明确丢弃才清空key；组件/真实CLI及Linux合成窗口已测，原生全键盘/IME/读屏及全产品可访问性未验收 |
+| REQ-103 | 可访问性与操作反馈 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：新增关闭期间禁止重启lease、运行地址不被偏好重载冒充、外部服务禁停、错误保留和换模revision；新增未保存草稿取消/关窗确认并保留内容、明确丢弃才清空key；新增Provider上下文Tab/Shift+Tab跳过只读ID并滚动到URL/key/env/models，实际Kit Root焦点与360px原生滚动分开验证；组件/真实CLI及Linux合成窗口已测，原生全键盘/IME/读屏及全产品可访问性未验收 |
 | REQ-104 | 参考截图与产品数据 | magpie-interfaces | `.deps/interfaces/specs/10-visual-and-localization.md` | 部分：依据固定原版来源和配方文字层级，新GPUI Scene明确使用隔离合成数据；未将参考截图作为业务数据或当前产品像素证据 |
 | REQ-105 | Library MCP Hub | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/11-upstream-additions.md` | 未实现：尚无Hub聚合入口、共享MCP后端、Agent作用域工具表及连接恢复。 |
 | REQ-106 | Responses previous_response_id 续接 | magpie-gateway | `.deps/interfaces/.deps/gateway/specs/11-upstream-additions.md` | 未实现：尚无调用者隔离的有界HTTP历史缓存、续接还原及未知ID/native relay处理。 |

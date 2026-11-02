@@ -1,5 +1,13 @@
 # 验证证据
 
+## 窄窗键盘与 issue 回归（2026-11-02 增量）
+
+源码 `ee9809fcb2a47497d66a6445db213d25c1ff46cb` 已发布。工作区 **329 passed / 4 ignored**，桌面 **80 passed / 3 ignored**，两工作区严格 Clippy/fmt 通过。新增 Provider 上下文专属键盘 Action 和完整字段顺序，修复 Kit 默认 Tab 跳过不可见字段；实际 360px 德语深色窗口验证 URL、密钥、环境变量和模型输入可滚动到达，Shift+Tab 返回。组件测试验证真实 Kit Root 下焦点顺序，未把缺少 OS 帧回调的 TestWindow 当作原生滚动证据。
+
+SSE 回归的 32+12 合成场景未复现原版 #4855 的计数成功/重播，实际修正 upstream_timeout 的 Timeout/504 归类。详情和剩余诊断/Usage缺口见 ISSUE_FEEDBACK.md。桌面 SHA-256 `e9fbbbb719add83d58117a7cf8e17bacb3269b2366fcb49ba6b905f0e9406da3`，机器证据为源码 tests/results/keyboard-stream-2026-11-02.json，原生 PNG 在源码树外 native-evidence。前轮 80 个离屏场景仍对应 0b9f02a，此轮只复核新增键盘原生流程。
+
+完整功能、用户视觉认可、原生全键盘/IME/读屏、真实外部账户与其他OS仍待验收，没有发布软件包或替换系统安装。
+
 ## Material 与共享状态整合（2026-11-02）
 
 源码已发布 `0b9f02aed6f4c56ff95333fe4637b6e6ffb16192`，保留远端 main 全部共享 Provider/凭据/监督网关和 Codex 换模能力，并接入固定 gpui-kit-material `47895b9` 的真实按钮、NavigationRail 和主题。旧首版已被用户否决，本轮不能继承视觉通过。
